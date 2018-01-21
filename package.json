@@ -1,0 +1,19 @@
+{
+  "name": "e-31_spring_2018_app",
+  "version": "1.0.0",
+  "description": "This Repo contains code for the [Companion App](http://e31.robertmfrenette.com) developed in [Rob's weekly online Section](https://github.com/RobertFrenette/E-31_Spring_2018) for CSCI E-31 Introduction to Web Application Development using Node.js (MEAN Stack)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobertFrenette/E-31_Spring_2018_App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RobertFrenette/E-31_Spring_2018_App/issues"
+  },
+  "homepage": "https://github.com/RobertFrenette/E-31_Spring_2018_App#readme"
+}

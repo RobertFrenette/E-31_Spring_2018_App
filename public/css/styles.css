@@ -1,0 +1,19 @@
+#logo {
+  padding-top: 10px;
+}
+.modal {
+  text-align: left;
+  color: #333;
+  text-shadow: none; 
+}
+.modal a {
+  color: blue;
+}
+.modal .btn-primary {
+  color: #fff;
+}
+.modal img {
+  float: left;
+  padding: 10px;
+  padding-bottom: 5px;
+}
