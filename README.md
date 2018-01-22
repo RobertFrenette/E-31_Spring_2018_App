@@ -4,7 +4,7 @@ This Repo contains code for the [Companion App](http://e31.robertmfrenette.com) 
 
 ## Harvard Extension School, Spring 2018
 
-### Teaching Asssitant: [Rob Frenette](http://www.linkedin.com/in/robertmfrenette)
+### Teaching Asssitant: [Rob Frenette](https://www.linkedin.com/in/robertmfrenette)
 
 ## Setup
 Clone (or download) Project then run ```npm install```.
