@@ -1,0 +1,15 @@
+// Node Modules
+const http = require('http');
+
+// Third-Party Modules
+const log = require('log-util');
+
+// Custom Modules
+var app = require('../app');
+
+const port = 8080;
+const server = http.createServer(app).listen(port);
+
+server.on('listening', () => {
+	log.info(`Server Listening on ${server.address().port}`);
+});

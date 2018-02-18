@@ -1,19 +1,17 @@
 #logo {
-  padding-top: 10px;
+    padding-top: 10px;
+  }
+button {
+    cursor: pointer;
 }
-.modal {
-  text-align: left;
-  color: #333;
-  text-shadow: none; 
+.hidden {
+    display: none;
+    /*visibility: hidden;*/
 }
-.modal a {
-  color: blue;
+#userNameSpan {
+    font-size: .75em;
 }
-.modal .btn-primary {
-  color: #fff;
-}
-.modal img {
-  float: left;
-  padding: 10px;
-  padding-bottom: 5px;
+.delete {
+    width: 50px !important;
+    text-align: center;
 }

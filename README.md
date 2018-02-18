@@ -7,7 +7,21 @@ This Repo contains code for the [Companion App](http://e31.robertmfrenette.com) 
 ### Teaching Assistant: [Rob Frenette](https://www.linkedin.com/in/robertmfrenette)
 
 ## Setup
-Clone (or download) Project then run ```npm install```.
+Clone / Fork / Download Project then run ```npm install```.
+
+## Execute
+### Production
+```
+npm start
+```
+
+### Development (nodemon)
+```
+npm run start-dev
+```
+
+## Load App
+[http://localhost:8080](http://localhost:8080)
 
 ## Reporting issues
 Use [Github's Issues section for this repository](https://github.com/RobertFrenette/E-31_Spring_2018_App/issues) to report any issues with the notes.

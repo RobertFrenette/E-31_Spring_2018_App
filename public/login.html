@@ -33,17 +33,33 @@
                 </div>
             </nav>
 
-            <div class="jumbotron text-center">
-                <h1 class="display-4">myLists</h1>
-                <h2>lists made easy</h2>
-                <p class="lead">
-                    <img src="img/logo.png" id="logo" alt="myLists list App" />
-                    <br />With myLists you can easily create and manage your Lists from your computer, smart phone or tablet.
-                </p>
-                <hr class="my-4" />
-                <p class="lead text-center">
-                    <a class="btn btn-primary btn-lg" href="login.html" role="button">Get Started</a>
-                </p>
+            <h1>Login</h1>
+            <div class="container">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="userName">User Name</label>
+                        <input type="text" class="form-control" id="userName" placeholder="Enter your User Name" required autofocus />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter your Password" required />
+                    </div>
+                    <div class="form-check rememberMe">
+                        <input type="checkbox" class="form-check-input" id="rememberMe" />
+                        <label class="form-check-label" for="rememberMe">Remember Me</label>
+                    </div>
+                    <br />
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
+                </form>
+            </div>
+            <div class="container">
+                <br />
+                <div class="alert alert-danger hidden" role="alert" id="errMsg"></div>
+                <br />Don't have an account?
+                <a href="register.html" title="Register">Register.</a>
+                <br />Forgot your password?
+                <a href="reset.html" title="Reset Password">Reset.</a>
             </div>
 
             <hr />
@@ -54,5 +70,7 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+        <script src="js/utils.js"></script>
+        <script src="js/login.js"></script>
     </body>
 </html>
