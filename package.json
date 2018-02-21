@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/RobertFrenette/E-31_Spring_2018_App#readme",
   "dependencies": {
-    "connect": "^3.6.6",
+    "express": "^4.16.2",
+    "hbs": "^4.0.1",
     "log-util": "^1.2.0"
   }
 }

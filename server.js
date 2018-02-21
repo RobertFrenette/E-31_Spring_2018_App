@@ -6,59 +6,71 @@ const path = require('path');
 const fs = require('fs');
 
 // Third-Party Modules
-const connect = require('connect');
+const express = require('express');
+const hbs = require('hbs');
 const log = require('log-util');
 
-var app = connect();
+var app = express();
+
+// register hbs partials
+hbs.registerPartials(__dirname + '/views/partials');
+// set view engine
+app.set('view engine', 'hbs');
+
+// partials
+hbs.registerHelper('getCurrentYear', () => {
+    return new Date().getFullYear();
+});
 
 // Middleware
-app.use((request, response) => {
-    const { pathname } = url.parse(request.url);
-    const public = '/public/';
-    const index = 'index.html';
-    const not_found = '404.html';
-    const server_err = '500.html';
+app.use(express.static(__dirname + '/public'));
 
-    let filePath = request.url;
-    if (filePath == '/') {
-        filePath = path.join(process.cwd(), public, index);
-    } else {
-        filePath = path.join(process.cwd(), public, request.url);
-    }
-    //log.ingo(`FilePath: ${filePath}`);
+// HBS Routes
+// Index page
+app.get('/', (req, res) => {
+    log.info('Loading: /');
+    res.render('index.hbs', {pageTitle: 'myLists'});
+});
+// User Routes
+app.get('/register', (req, res) => {
+    log.info('Loading: /register');
+    res.render('register.hbs', {pageTitle: 'Register'});
+});
+app.get('/login', (req, res) => {
+    log.info('Loading: /login');
+    res.render('login.hbs', {pageTitle: 'Login'});
+});
+app.get('/logout', (req, res) => {
+    log.info('Loading: /logout');
+    res.render('index.hbs', {pageTitle: 'myLists'});
+});
+// reset pwd
+app.get('/reset', (req, res) => {
+    log.info('Loading: /reset');
+    res.render('reset.hbs', {pageTitle: 'Password Reset'});
+});
+// confirm pwd reset - via email link
+app.get('/confirm', (req, res) => {
+    log.info('Loading: /confirm');
+    res.render('confirm.hbs', {pageTitle: 'Password Reset'});
+});
 
-    let extname = String(path.extname(filePath)).toLowerCase();
-    let contentType = 'text/html';
-    const mimeTypes = {
-        '.html': 'text/html',
-        '.css': 'text/css',
-        '.js': 'application/javascript',
-        '.json': 'application/json',
-        '.png': 'image/png'
-    };
-    contentType = mimeTypes[extname] || 'application/octet-stream';
+// Item List page
+app.get('/home', (req, res) => {
+    log.info('Loading: /home');
+    res.render('home.hbs', {pageTitle: 'Items'});
+});
 
-    fs.readFile(filePath, (error, content) => {
-        if (error) {
-            if(error.code == 'ENOENT') {
-                // if request for dir, change contentType to html to serve 404
-                if (contentType === 'application/octet-stream') {
-                    contentType = 'text/html';
-                }
-                fs.readFile(path.join(process.cwd(), public, not_found), (error, content) => {
-                    response.writeHead(404, { 'Content-Type': contentType });
-                    response.end(content, 'utf-8');
-                });
-            } else {
-                fs.readFile(path.join(process.cwd(), public, server_err), (error, content) => {
-                    response.writeHead(500, { 'Content-Type': contentType });
-                    response.end(content, 'utf-8');
-                });
-            }
-        } else {
-            response.end(content, 'utf-8');
-        }
-    });
+// Error-handling middleware 
+// Handle http 404 response
+app.use((request, response, next) => {
+    log.error(`404: ${request.url}`);
+    response.status(404).redirect('/404.html');
+});
+// Handle 500 response
+app.use((request, response, next) => {
+    log.error(`500: ${request.url}`);
+    response.status(500).redirect('/error.html');
 });
 
 const port = 8080;

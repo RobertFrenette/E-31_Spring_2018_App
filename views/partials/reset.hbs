@@ -1,0 +1,15 @@
+<h1>{{pageTitle}}</h1>
+<div class="container">
+    <form id="resetForm">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your Email Address" required autofocus />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button> <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
+    </form>
+</div>
+<div class="container">
+    <br />
+    <div class="alert alert-danger hidden" role="alert" id="errMsg"></div>
+    <div class="alert alert-success hidden" role="alert" id="successMsg">An email has been sent with a rest link.</div>
+</div>
