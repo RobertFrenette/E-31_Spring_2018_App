@@ -28,36 +28,36 @@ app.use(express.static(__dirname + '/public'));
 // HBS Routes
 // Index page
 app.get('/', (req, res) => {
-    log.info('Loading: /');
+    //log.info('Loading: /');
     res.render('index.hbs', {pageTitle: 'myLists'});
 });
 // User Routes
 app.get('/register', (req, res) => {
-    log.info('Loading: /register');
+    //log.info('Loading: /register');
     res.render('register.hbs', {pageTitle: 'Register'});
 });
 app.get('/login', (req, res) => {
-    log.info('Loading: /login');
+    //log.info('Loading: /login');
     res.render('login.hbs', {pageTitle: 'Login'});
 });
 app.get('/logout', (req, res) => {
-    log.info('Loading: /logout');
+    //log.info('Loading: /logout');
     res.render('index.hbs', {pageTitle: 'myLists'});
 });
 // reset pwd
 app.get('/reset', (req, res) => {
-    log.info('Loading: /reset');
+    //log.info('Loading: /reset');
     res.render('reset.hbs', {pageTitle: 'Password Reset'});
 });
 // confirm pwd reset - via email link
 app.get('/confirm', (req, res) => {
-    log.info('Loading: /confirm');
+    //log.info('Loading: /confirm');
     res.render('confirm.hbs', {pageTitle: 'Password Reset'});
 });
 
 // Item List page
 app.get('/home', (req, res) => {
-    log.info('Loading: /home');
+    //log.info('Loading: /home');
     res.render('home.hbs', {pageTitle: 'Items'});
 });
 
