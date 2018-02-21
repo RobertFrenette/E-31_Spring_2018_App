@@ -1,4 +1,4 @@
-// Simple Node Connect HTTP Server - will be replace with Express later in the Semester
+// Express Server
 // Node Modules
 const http = require('http');
 const url = require('url');
