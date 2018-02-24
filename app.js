@@ -9,54 +9,23 @@ const express = require('express');
 const hbs = require('hbs');
 const log = require('log-util');
 
-var app = express();
-
-// register hbs partials
-hbs.registerPartials(__dirname + '/views/partials');
-// set view engine
-app.set('view engine', 'hbs');
-
-// partials
-hbs.registerHelper('getCurrentYear', () => {
-    return new Date().getFullYear();
-});
-
+// include routes
+const users = require('./routes/users');
+const auth = require('./routes/auth');
 // Middleware
 app.use(express.static(__dirname + '/public'));
+
+// use routes
+app.use('/users', users);
+app.use('/auth', auth);
 
 // HBS Routes
 // Index page
 app.get('/', (req, res) => {
-    //log.info('Loading: /');
     res.render('index.hbs', {pageTitle: 'myLists'});
 });
-// User Routes
-app.get('/register', (req, res) => {
-    //log.info('Loading: /register');
-    res.render('register.hbs', {pageTitle: 'Register'});
-});
-app.get('/login', (req, res) => {
-    //log.info('Loading: /login');
-    res.render('login.hbs', {pageTitle: 'Login'});
-});
-app.get('/logout', (req, res) => {
-    //log.info('Loading: /logout');
-    res.render('index.hbs', {pageTitle: 'myLists'});
-});
-// reset pwd
-app.get('/reset', (req, res) => {
-    //log.info('Loading: /reset');
-    res.render('reset.hbs', {pageTitle: 'Password Reset'});
-});
-// confirm pwd reset - via email link
-app.get('/confirm', (req, res) => {
-    //log.info('Loading: /confirm');
-    res.render('confirm.hbs', {pageTitle: 'Password Reset'});
-});
-
 // Item List page
 app.get('/home', (req, res) => {
-    //log.info('Loading: /home');
     res.render('home.hbs', {pageTitle: 'Items'});
 });
 
