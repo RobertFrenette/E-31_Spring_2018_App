@@ -1,4 +1,8 @@
-// Simple Node Connect HTTP Server - will be replace with Express later in the Semester
+// Express Server
+
+// Secure Config
+require('./config/config');
+
 // Node Modules
 const url = require('url');
 const path = require('path');
@@ -12,6 +16,19 @@ const log = require('log-util');
 // include routes
 const users = require('./routes/users');
 const auth = require('./routes/auth');
+
+var app = express();
+
+// register hbs partials
+hbs.registerPartials(__dirname + '/views/partials');
+// set view engine
+app.set('view engine', 'hbs');
+
+// partials
+hbs.registerHelper('getCurrentYear', () => {
+    return new Date().getFullYear();
+});
+
 // Middleware
 app.use(express.static(__dirname + '/public'));
 

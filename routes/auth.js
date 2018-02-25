@@ -1,6 +1,9 @@
 const express = require('express');
 const authRouter = express.Router();
 
+// Include Custom Modules
+const mailer = require('./../utils/mailer');
+
 // Auth Routes
 // reset pwd
 authRouter.get('/reset', (req, res) => {

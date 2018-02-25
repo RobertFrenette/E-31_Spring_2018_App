@@ -1,4 +1,8 @@
 // Express Server
+
+// Secure Config
+require('./config/config');
+
 // Node Modules
 const http = require('http');
 const url = require('url');
