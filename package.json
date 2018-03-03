@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nohup node /bin/www &",
-    "start-dev": "nodemon --inspect /bin/www"
+    "start": "nohup node ./bin/www &",
+    "start-dev": "nodemon --inspect ./bin/www"
   },
   "repository": {
     "type": "git",
