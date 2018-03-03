@@ -36,10 +36,10 @@ npm run start-dev
 ``` 
 # git pull
 # npm install
-# nohup node YOUR_SCRIPT_NAME &
+# killall -q node && npm start
 ```
 
-### To Stop the Node Process
+### To Stop a Specific Node Process
 ```
 # ps aux
 
