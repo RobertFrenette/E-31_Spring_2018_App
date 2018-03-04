@@ -49,6 +49,7 @@ authRouter.post('/register', (req, res) => {
   let user = persist.insertUser(username, email, password);
   if (user) {
     // success
+    mailer.sendRegMail(username, email);
     res.end();
   }
   res.status(400).send();

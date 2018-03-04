@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer');
 const privateEmailAddress    = process.env.EMAIL_ADDRESS;
 const privateEmailAddressPwd = process.env.EMAIL_PASSWORD;
 const emailService           = process.env.EMAIL_SERVICE;
-const URI = 'http://45.55.86.26:8080/confirm'; // Note: Could set URI dynamically
+const URI = 'http://45.55.86.26:8080/'; // Note: Could set URI dynamically
 
 // For GMAIL: https://myaccount.google.com/lesssecureapps
 var transporter = nodemailer.createTransport({
@@ -22,13 +22,14 @@ var transporter = nodemailer.createTransport({
 var mailOptions = {
   from: privateEmailAddress,
   to: '',
-  subject: 'myLists App: Password Reset Request',
+  subject: '',
   text: ''
 };
 
-var sendMail = (emailAddress) => {
-    mailOptions.to = emailAddress;
-    mailOptions.text = `Please use the following link to reset your myLists password: ${URI}/${emailAddress}`;
+var sendRegMail = (username, email) => {
+    mailOptions.to = email;
+    mailOptions.subject = `Welcome to myLists, ${username}!`;
+    mailOptions.text = `You can access the site using this URL: ${URI}`;
     
     return transporter.sendMail(mailOptions)
     .then(
@@ -42,5 +43,5 @@ var sendMail = (emailAddress) => {
 };
 
 module.exports = {
-    sendMail
+  sendRegMail
 };
