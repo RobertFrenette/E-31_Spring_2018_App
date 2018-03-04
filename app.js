@@ -12,6 +12,7 @@ const fs = require('fs');
 const express = require('express');
 const hbs = require('hbs');
 const log = require('log-util');
+const bodyParser = require('body-parser');
 
 // include routes
 const users = require('./routes/users');
@@ -31,6 +32,8 @@ hbs.registerHelper('getCurrentYear', () => {
 
 // Middleware
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // use routes
 app.use('/users', users);

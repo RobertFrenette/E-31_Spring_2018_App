@@ -14,12 +14,33 @@ $(document).ready(function() {
       event.preventDefault();
       
       var data = {};
-      data.userName = userName.val().trim();
+      data.username = userName.val().trim();
       data.password = password.val().trim();
       
-      // AJAX POST TBD
+      // TEMP
       alert('Functionality not yet implemented!');
       resetBtn.click();
+      return;
+
+      // AJAX POST
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify(data),
+            contentType: 'application/json',
+            url: 'http://localhost:8080/auth/login'
+      })
+      .done(function(res) {
+        // we always want to persist the UserName, even if the User didn't check the rememberMe checkbox
+        // this is because we need the UserName later to see if User has logged in
+        if (localStorargeSupported()) {
+            localStorage.setItem('persistedData', JSON.stringify({"userName": userName.val(), "rememberMe": rememberMe.is(':checked')}));
+        }
+      })
+      .fail(function(res) {
+        errMsg.html('Login failed. Please try again.');
+        errMsg.show();
+        userName.focus();
+      });
     });
 
   resetBtn.click(function() {

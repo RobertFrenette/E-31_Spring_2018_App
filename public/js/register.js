@@ -24,13 +24,37 @@ $(document).ready(function() {
         errMsg.show();
       } else {
         var data = {};
-        data.userName = userName.val().trim();
+        data.username = userName.val().trim();
         data.email    = email.val().trim();
         data.password = password.val().trim();
         
-        // AJAX POST TBD
+        // TEMP
         alert('Functionality not yet implemented!');
         resetBtn.click();
+        return;
+
+        // AJAX POST
+        $.ajax({
+          type: 'POST',
+          data: JSON.stringify(data),
+              contentType: 'application/json',
+              url: 'http://localhost:8080/auth/register'
+        })
+        .done(function(res) {
+          window.location.href = '/users/login';
+        })
+        .fail(function(res) {
+          var msg = '';
+          
+          if (res.status === 400) {
+            msg = '<br />Error: A User with these credentials already exists.';
+            confirm.val('');
+            password.focus();
+          }
+        
+          errMsg.html(`Registration failed. Please try again.${msg}`);
+          errMsg.show();
+        });
       }
     });
 

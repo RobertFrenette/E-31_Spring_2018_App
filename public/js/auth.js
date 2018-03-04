@@ -14,7 +14,5 @@
     if (persistedUserName === '') {
         // no UserName in Storge, so User did not log in
         window.location.href = '/error.html';
-    } else {
-        // AJAX GET TBD
     }
 })();
