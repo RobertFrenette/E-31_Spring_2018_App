@@ -74,6 +74,7 @@ $(document).ready(function() {
         data.description = description.val().trim();
         
         // AJAX POST TBD
+        alert('Persist functionality not yet implemented!');
         addNewItem(0, itemName.val().trim(), description.val().trim());
     });
     
@@ -93,10 +94,13 @@ $(document).ready(function() {
         if (getLoginStatus()) {
             $('#userNameSpan').text(getPersistedUserName());
             $('#homeContainer').removeClass('hidden');
+            $('#itemsDiv').removeClass('hidden');
         } else {
             document.location.href = '/error.html';
         }
     } else { // but, just in case...
+        $('#userNameSpan').text('');
         $('#homeContainer').removeClass('hidden');
+        $('#itemsDiv').removeClass('hidden');
     }
 });
