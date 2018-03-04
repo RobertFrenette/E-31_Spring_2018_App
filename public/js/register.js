@@ -28,11 +28,6 @@ $(document).ready(function() {
         data.email    = email.val().trim();
         data.password = password.val().trim();
         
-        // TEMP
-        alert('Functionality not yet implemented!');
-        resetBtn.click();
-        return;
-
         // AJAX POST
         $.ajax({
           type: 'POST',

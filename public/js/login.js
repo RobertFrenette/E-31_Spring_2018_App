@@ -16,11 +16,6 @@ $(document).ready(function() {
       var data = {};
       data.username = userName.val().trim();
       data.password = password.val().trim();
-      
-      // TEMP
-      alert('Functionality not yet implemented!');
-      resetBtn.click();
-      return;
 
       // AJAX POST
       $.ajax({
@@ -33,8 +28,11 @@ $(document).ready(function() {
         // we always want to persist the UserName, even if the User didn't check the rememberMe checkbox
         // this is because we need the UserName later to see if User has logged in
         if (localStorargeSupported()) {
-            localStorage.setItem('persistedData', JSON.stringify({"userName": userName.val(), "rememberMe": rememberMe.is(':checked')}));
+          localStorage.setItem('persistedData', JSON.stringify({"userName": userName.val(), "rememberMe": rememberMe.is(':checked'), "auth": true}));
         }
+
+        // call funct in utils.js
+        setLoginStatus(userName.val(), true, '/home') ;
       })
       .fail(function(res) {
         errMsg.html('Login failed. Please try again.');

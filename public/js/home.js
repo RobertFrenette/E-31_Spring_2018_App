@@ -4,7 +4,7 @@ $(document).ready(function() {
     // Get HTML Elements
     var registerLink = $('#registerLink');
     var loginLink    = $('#loginLink');
-    var logoutLink   = $('#logoutLink');
+    var logoutLink  = $('#logoutLink');
 
     var addItemForm  = $('#addItemForm');
     var resetBtn     = $('#resetBtn');
@@ -51,9 +51,8 @@ $(document).ready(function() {
     logoutLink.click(function(e) {
         e.preventDefault();
 
-        setLoginStatus($('#userNameSpan').text(), false, '/') ;
-        // Temp:
-        document.location.href="/";
+        // call funct in utils.js
+        removeLoginStatus($('#userNameSpan').text(), false, '/') ;
     });
 
     resetBtn.click(function() {
@@ -87,5 +86,17 @@ $(document).ready(function() {
 	$("table").tablesorter({
 		theme: 'blue',
         headers: { 0: { sorter: false}, 1: { sorter: false}, 2: { sorter: false} }
-	});
+    });
+    
+    // There really should be localStorage support...
+    if (localStorargeSupported()) {
+        if (getLoginStatus()) {
+            $('#userNameSpan').text(getPersistedUserName());
+            $('#homeContainer').removeClass('hidden');
+        } else {
+            document.location.href = '/error.html';
+        }
+    } else { // but, just in case...
+        $('#homeContainer').removeClass('hidden');
+    }
 });

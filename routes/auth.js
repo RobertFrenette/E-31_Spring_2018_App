@@ -41,24 +41,30 @@ authRouter.post('/confirm', (req, res) => {
 
 // Register a User
 authRouter.post('/register', (req, res) => {
-  // TBD: POST Route for authenticating registration
   let username = req.body.username;
   let email = req.body.email;
   let password = req.body.password;
-  log.info(`${username}, ${email}, ${password}`);
+  log.info(`Register: ${username}, ${email}, ${password}`);
 
-  //res.end('POST: /auth/register');
+  let user = persist.insertUser(username, email, password);
+  if (user) {
+    // success
+    res.end();
+  }
   res.status(400).send();
 });
 
 // User Login
 authRouter.post('/login', (req, res) => {
-  // TBD: POST Route for authenticating login
   let username = req.body.username;
   let password = req.body.password;
-  log.info(`${username}, ${password}`);
+  log.info(`Login: ${username}, ${password}`);
 
-  //res.end('POST: /auth/login');
+  let user = persist.getUserByUserNameAndPassword(username, password);
+  if (user) {
+    // success
+    res.end();
+  }
   res.status(400).send();
 });
 

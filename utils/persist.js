@@ -54,6 +54,14 @@ var getUserByEmail = (email) => {
   return filteredUsers[0];
 };
 
+// Get a single User by username and password == Authenticate!
+var getUserByUserNameAndPassword = (username, password) => {
+    var users = getUsers();
+    var filteredUsers = users.filter((user) => user.username === username && user.password === password);
+    return filteredUsers[0];
+};
+
+
 // "Update" (delete and insert) a User
 var updateUser = (username, email, password) => {
   var users = getUsers();
@@ -89,6 +97,7 @@ module.exports = {
   insertUser,
   getUserByUserName,
   getUserByEmail,
+  getUserByUserNameAndPassword,
   updateUser,
   deleteUser,
   listUsers
