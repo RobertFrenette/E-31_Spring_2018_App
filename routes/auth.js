@@ -15,16 +15,22 @@ authRouter.get('/reset', (req, res) => {
 
 // confirm pwd reset - via email link
 authRouter.get('/confirm', (req, res) => {
-  res.render('confirm.hbs', {pageTitle: 'Password Reset'});
+  res.render('confirm.hbs', {pageTitle: 'Password Reset', qry_email_Address: req.query.email});
 });
 
 // reset pwd
 authRouter.post('/reset', (req, res) => {
   // TBD: POST Route for password reset
-  let email = request.body.email;
-  log.info(`${email}`);
+  let email = req.body.email;
+  log.info(`Password Reset: ${email}`);
 
-  res.end('POST: /auth/reset');
+  let user = persist.getUserByEmail(email);
+  if (user) {
+    // success
+    mailer.sendResetMail(email);
+    res.end();
+  }
+  res.status(400).send();
 });
 
 // confirm pwd reset - via email link

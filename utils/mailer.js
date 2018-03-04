@@ -35,16 +35,36 @@ var sendRegMail = (username, email) => {
     return transporter.sendMail(mailOptions)
     .then(
       function(info) {
-        log.info(`Email sent to User ${username} at ${email}.`);
+        log.info(`Registration Email sent to User ${username} at ${email}.`);
         return({'success': true});
       },
       function(error){
-        log.error(`Unable to send mail to User ${username} at ${email}.`);
+        log.error(`Unable to send Registration email to User ${username} at ${email}.`);
         return({'success': false});
       }
     );
 };
 
+var sendResetMail = (email) => {
+  mailOptions.to = email;
+  mailOptions.subject = `myLists Password Reset`;
+  // Note: This should be more secure!
+  mailOptions.text = `Please use the following link to reset your myLists Password: ${URI}auth/confirm?email=${email}`;
+  
+  return transporter.sendMail(mailOptions)
+  .then(
+    function(info) {
+      log.info(`Password Reset Email sent to ${email}.`);
+      return({'success': true});
+    },
+    function(error){
+      log.error(`Unable to send Password Reset email to ${email}.`);
+      return({'success': false});
+    }
+  );
+};
+
 module.exports = {
-  sendRegMail
+  sendRegMail,
+  sendResetMail
 };

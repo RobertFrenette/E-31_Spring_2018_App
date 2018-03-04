@@ -13,10 +13,31 @@ $(document).ready(function() {
       event.preventDefault();
       
       var emailAddress = email.val().trim();
+      
+      var data = {};
+      data.email = emailAddress;
    
-      // AJAX POST TBD
-      alert('Functionality not yet implemented!');
-      resetBtn.click();
+      // AJAX POST
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify(data),
+            contentType: 'application/json',
+            url: '/auth/reset'
+      })
+      .done(function(res) {
+        console.log(res);
+        errMsg.removeClass('alert-danger');
+        errMsg.addClass('alert-success');
+        errMsg.html('Success: Please check your email.');
+        errMsg.show();
+      })
+      .fail(function(res) {
+        errMsg.removeClass('alert-success');
+        errMsg.addClass('alert-danger');
+        errMsg.html('Error: Email Address not found.');
+        errMsg.show();
+        email.focus();
+      });
     });
 
   resetBtn.click(function() {
