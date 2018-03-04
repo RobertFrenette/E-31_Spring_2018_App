@@ -33,7 +33,7 @@ $(document).ready(function() {
           type: 'POST',
           data: JSON.stringify(data),
               contentType: 'application/json',
-              url: 'http://localhost:8080/auth/register'
+              url: '/auth/register'
         })
         .done(function(res) {
           window.location.href = '/users/login';

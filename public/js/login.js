@@ -22,7 +22,7 @@ $(document).ready(function() {
         type: 'POST',
         data: JSON.stringify(data),
             contentType: 'application/json',
-            url: 'http://localhost:8080/auth/login'
+            url: '/auth/login'
       })
       .done(function(res) {
         // we always want to persist the UserName, even if the User didn't check the rememberMe checkbox
