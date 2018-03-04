@@ -22,7 +22,7 @@ authRouter.get('/confirm', (req, res) => {
 authRouter.post('/reset', (req, res) => {
   // TBD: POST Route for password reset
   let email = req.body.email;
-  log.info(`Password Reset: ${email}`);
+  log.info(`Password Reset Request: ${email}`);
 
   let user = persist.getUserByEmail(email);
   if (user) {
@@ -35,14 +35,21 @@ authRouter.post('/reset', (req, res) => {
 
 // confirm pwd reset - via email link
 authRouter.post('/confirm', (req, res) => {
-  // TBD: POST Route for password reset confirm
   let username = req.body.username;
   let email = req.body.email;
   let password = req.body.password;
-  let confirm = req.body.confirm;
-  log.info(`${username}, ${email}, ${password}, ${confirm}`);
+  log.info(`Password Reset Confirm: ${username}, ${email}, ${password}`);
 
-  res.end('POST: /auth/confirm');
+  let user = persist.getUserByUserNameAndEmail(username, email);
+  if (user) {
+    let updatedUser = persist.updateUser(username, email, password);
+    if (updatedUser) {
+      res.end();
+    } else {
+      res.status(400).send();
+    }
+  }
+  res.status(400).send();
 });
 
 // Register a User

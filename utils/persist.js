@@ -61,6 +61,12 @@ var getUserByUserNameAndPassword = (username, password) => {
     return filteredUsers[0];
 };
 
+// Get a single User by username and email for Password Reset confirm
+var getUserByUserNameAndEmail = (username, email) => {
+    var users = getUsers();
+    var filteredUsers = users.filter((user) => user.username === username && user.email === email);
+    return filteredUsers[0];
+};
 
 // "Update" (delete and insert) a User
 var updateUser = (username, email, password) => {
@@ -98,6 +104,7 @@ module.exports = {
   getUserByUserName,
   getUserByEmail,
   getUserByUserNameAndPassword,
+  getUserByUserNameAndEmail,
   updateUser,
   deleteUser,
   listUsers

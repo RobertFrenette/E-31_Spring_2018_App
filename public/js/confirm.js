@@ -24,13 +24,32 @@ $(document).ready(function() {
         errMsg.html('Passwords do not match.');
         errMsg.show();
       } else {
-        var userNameParam = userName.val().trim();
-        var emailParam    = email.val().trim();
-        var passwordParam = password.val().trim();
-        
-        // AJAX POST TBD
-        alert('Functionality not yet implemented!');
-        resetBtn.click();
+        var data = {};
+        data.username = userName.val().trim();
+        data.email    = email.val().trim();
+        data.password = password.val().trim();
+
+        // AJAX POST
+        $.ajax({
+          type: 'POST',
+          data: JSON.stringify(data),
+              contentType: 'application/json',
+              url: '/auth/confirm'
+        })
+        .done(function(res) {
+          console.log(res);
+          errMsg.removeClass('alert-danger');
+          errMsg.addClass('alert-success');
+          errMsg.html('Success: Your password has been reset.');
+          errMsg.show();
+        })
+        .fail(function(res) {
+          errMsg.removeClass('alert-success');
+          errMsg.addClass('alert-danger');
+          errMsg.html('Error: User not found.');
+          errMsg.show();
+          email.focus();
+        });
       }
     });
 
