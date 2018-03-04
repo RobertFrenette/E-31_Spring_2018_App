@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const log = require('log-util');
 
 // NOTE: This is a simple example of sending mail and implemeting PWD reset functionality.
 //       This should be more secure in a PROD App!
@@ -34,9 +35,11 @@ var sendRegMail = (username, email) => {
     return transporter.sendMail(mailOptions)
     .then(
       function(info) {
+        log.info(`Email sent to User ${username} at ${email}.`);
         return({'success': true});
       },
       function(error){
+        log.error(`Unable to send mail to User ${username} at ${email}.`);
         return({'success': false});
       }
     );
