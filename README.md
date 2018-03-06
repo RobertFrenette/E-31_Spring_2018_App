@@ -6,6 +6,8 @@ This Repo contains code for the [Companion App](http://e31.robertmfrenette.com) 
 
 ### Teaching Assistant: [Rob Frenette](https://www.linkedin.com/in/robertmfrenette)
 
+![myLists](img/mylists.jpg?raw=true "myLists")
+
 ## Setup
 Clone / Fork / Download Repo then run ```npm install```.
 
