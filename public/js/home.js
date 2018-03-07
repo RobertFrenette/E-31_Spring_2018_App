@@ -4,7 +4,7 @@ $(document).ready(function() {
     // Get HTML Elements
     var registerLink = $('#registerLink');
     var loginLink    = $('#loginLink');
-    var logoutLink  = $('#logoutLink');
+    var logoutLink   = $('#logoutLink');
 
     var addItemForm  = $('#addItemForm');
     var resetBtn     = $('#resetBtn');
@@ -70,12 +70,28 @@ $(document).ready(function() {
         errMsg.hide();
         
         var data = {};
-        data.itemName = itemName.val().trim();
+        data.username = $('#userNameSpan').html();
+        data.itemname = itemName.val().trim();
         data.description = description.val().trim();
         
-        // AJAX POST TBD
-        alert('Persist functionality not yet implemented!');
+      // AJAX POST
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify(data),
+            contentType: 'application/json',
+            url: '/lists/'
+      })
+      .done(function(res) {
+        // Item successfully persisted on server
         addNewItem(0, itemName.val().trim(), description.val().trim());
+
+        itemName.focus();
+      })
+      .fail(function(res) {
+        errMsg.html(`Error:  Unable to save Item ${data.itemname} to list.`);
+        errMsg.show();
+        itemName.focus();
+      });
     });
     
     getAllItems();

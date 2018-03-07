@@ -17,6 +17,7 @@ const bodyParser = require('body-parser');
 // include routes
 const users = require('./routes/users');
 const auth = require('./routes/auth');
+const lists = require('./routes/lists');
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // use routes
 app.use('/users', users);
 app.use('/auth', auth);
+app.use('/lists', lists);
 
 // HBS Routes
 // Index page

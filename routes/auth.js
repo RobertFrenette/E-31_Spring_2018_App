@@ -5,7 +5,7 @@ const log = require('log-util');
 
 // Include Custom Modules
 const mailer = require('./../utils/mailer');
-const persist = require('./../utils/persist');
+const user_persist = require('./../utils/user_persist');
 
 // Auth Routes
 // reset pwd
@@ -24,7 +24,7 @@ authRouter.post('/reset', (req, res) => {
   let email = req.body.email;
   log.info(`Password Reset Request: ${email}`);
 
-  let user = persist.getUserByEmail(email);
+  let user = user_persist.getUserByEmail(email);
   if (user) {
     // success
     mailer.sendResetMail(email);
@@ -40,9 +40,9 @@ authRouter.post('/confirm', (req, res) => {
   let password = req.body.password;
   log.info(`Password Reset Confirm: ${username}, ${email}, ${password}`);
 
-  let user = persist.getUserByUserNameAndEmail(username, email);
+  let user = user_persist.getUserByUserNameAndEmail(username, email);
   if (user) {
-    let updatedUser = persist.updateUser(username, email, password);
+    let updatedUser = user_persist.updateUser(username, email, password);
     if (updatedUser) {
       res.end();
     } else {
@@ -59,7 +59,7 @@ authRouter.post('/register', (req, res) => {
   let password = req.body.password;
   log.info(`Register: ${username}, ${email}, ${password}`);
 
-  let user = persist.insertUser(username, email, password);
+  let user = user_persist.insertUser(username, email, password);
   if (user) {
     // success
     mailer.sendRegMail(username, email);
@@ -74,7 +74,7 @@ authRouter.post('/login', (req, res) => {
   let password = req.body.password;
   log.info(`Login: ${username}, ${password}`);
 
-  let user = persist.getUserByUserNameAndPassword(username, password);
+  let user = user_persist.getUserByUserNameAndPassword(username, password);
   if (user) {
     // success
     res.end();
