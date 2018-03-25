@@ -37,21 +37,38 @@ itemRouter.get('/', (req, res) => {
  
 itemRouter.post('/', (req, res) => {
   let username = req.body.username;
-  let itemname = req.body.itemname;
-  let description = req.body.description || ' ';
- 
-  if (username && itemname && description) {
-    let list = list_persist.insertItem(username, {"name": itemname, "desc": description});
- 
-    if (list.length > 0) {
-      res.end(JSON.stringify(list));
+  let itemname = req.body.name;
+  let description = req.body.desc || ' ';
+
+  var item = new Item({
+    username: username,
+    name: itemname,
+    desc: description
+  });
+
+  Item.find()
+  .and([
+      { $and: [{username: username}, {name: itemname}] }
+  ])
+  .exec((err, i) => {
+    if (err) { 
+      log.error(`Add Item Error: ${err}`);
+    } else {
+      if (i.length === 0) {
+        // User does not exist
+        item.save().then((i) => {
+          res.status(200).send(i);
+        }, (err) => {
+          log.error(`Add Item Error: ${err}`);
+          res.status(500).send();
+        });
+      } else {
+        // Item exists
+        log.error(`Add Item Error: Item with name ${itemname} already esists for User ${username}.`);
+        res.status(400).send();
+      }
     }
-    // no items (or file doesn't exist yet)
-    res.status(400).send();
-  } else {
-    // username and/or itemname and/or quantity not passed
-    res.status(500).send();
-  }
+  });
 });
  
 module.exports = itemRouter;
