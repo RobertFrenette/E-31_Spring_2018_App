@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nohup node ./bin/www &",
+    "start-local": "node ./bin/www",
     "start-dev": "nodemon --inspect ./bin/www"
   },
   "repository": {
@@ -20,9 +21,14 @@
   "homepage": "https://github.com/RobertFrenette/E-31_Spring_2018_App#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "connect-cookies": "0.0.0",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^5.0.1",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
     "hbs": "^4.0.1",
     "log-util": "^1.2.0",
+    "mongoose": "^5.0.11",
     "nodemailer": "^4.6.0"
   }
 }

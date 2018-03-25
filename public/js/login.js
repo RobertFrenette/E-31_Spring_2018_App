@@ -32,7 +32,7 @@ $(document).ready(function() {
         }
 
         // call funct in utils.js
-        setLoginStatus(userName.val(), true, '/home') ;
+        setLoginStatus(userName.val(), true, `/items/home/${userName.val().trim()}`) ;
       })
       .fail(function(res) {
         errMsg.html('Login failed. Please try again.');

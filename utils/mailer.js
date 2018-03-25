@@ -4,11 +4,10 @@ const log = require('log-util');
 // NOTE: This is a simple example of sending mail and implemeting PWD reset functionality.
 //       This should be more secure in a PROD App!
 // https://www.w3schools.com/nodejs/nodejs_email.asp
-// ENV vars should be set in config/config.json file
+// ENV vars should be set in .env file (used by dotenv Module)
 const privateEmailAddress    = process.env.EMAIL_ADDRESS;
 const privateEmailAddressPwd = process.env.EMAIL_PASSWORD;
 const emailService           = process.env.EMAIL_SERVICE;
-const URI = 'http://45.55.86.26:8080/'; // Note: Could set URI dynamically
 
 // For GMAIL: https://myaccount.google.com/lesssecureapps
 var transporter = nodemailer.createTransport({
@@ -27,10 +26,10 @@ var mailOptions = {
   text: ''
 };
 
-var sendRegMail = (username, email) => {
+var sendRegMail = (username, email, URI) => {
     mailOptions.to = email;
     mailOptions.subject = `Welcome to myLists, ${username}!`;
-    mailOptions.text = `You can access the site using this URL: ${URI}`;
+    mailOptions.text = `You can access the site using this URL: http://${URI}`;
     
     return transporter.sendMail(mailOptions)
     .then(
@@ -45,7 +44,7 @@ var sendRegMail = (username, email) => {
     );
 };
 
-var sendResetMail = (email) => {
+var sendResetMail = (email, URI) => {
   mailOptions.to = email;
   mailOptions.subject = `myLists Password Reset`;
   // Note: This should be more secure!

@@ -1,7 +1,4 @@
-// Express Server
-
-// Secure Config
-require('./config/config');
+require('dotenv').config();
 
 // Node Modules
 const url = require('url');
@@ -17,7 +14,9 @@ const bodyParser = require('body-parser');
 // include routes
 const users = require('./routes/users');
 const auth = require('./routes/auth');
-const lists = require('./routes/lists');
+const items = require('./routes/items');
+
+const {mongoose} = require('./db/mongoose');
 
 var app = express();
 
@@ -39,16 +38,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // use routes
 app.use('/users', users);
 app.use('/auth', auth);
-app.use('/lists', lists);
+app.use('/items', items);
 
 // HBS Routes
 // Index page
 app.get('/', (req, res) => {
     res.render('index.hbs', {pageTitle: 'myLists'});
-});
-// Item List page
-app.get('/home', (req, res) => {
-    res.render('home.hbs', {pageTitle: 'Items'});
 });
 
 // Error-handling middleware 

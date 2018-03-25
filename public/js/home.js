@@ -16,8 +16,15 @@ $(document).ready(function() {
     
     function getAllItems() {
         itemsList.html('');
-        
-        // AJAX GET TBD
+
+        $.getJSON(`/items?username=${$('#userNameSpan').html()}`, function() {
+        })
+        .done(function(data) {
+            // TBD
+        })
+        .fail(function(err) {
+          // Ignore
+        });
     }
     
     function addNewItem(id, name, desc) {
@@ -94,8 +101,6 @@ $(document).ready(function() {
       });
     });
     
-    getAllItems();
-    
     registerLink.hide();
     loginLink.hide();
     logoutLink.show();
@@ -119,4 +124,6 @@ $(document).ready(function() {
         $('#homeContainer').removeClass('hidden');
         $('#itemsDiv').removeClass('hidden');
     }
+
+    getAllItems();
 });
