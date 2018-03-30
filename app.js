@@ -10,6 +10,8 @@ const express = require('express');
 const hbs = require('hbs');
 const log = require('log-util');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 // include routes
 const users = require('./routes/users');
@@ -19,6 +21,13 @@ const items = require('./routes/items');
 const {mongoose} = require('./db/mongoose');
 
 var app = express();
+
+app.use(cookieParser(`${process.env.COOKIE_KEY}`));
+app.use(session({
+  secret:`${process.env.SESSION_KEY}`,
+  resave: "true",
+  saveUninitialized: "true"
+}));
 
 // register hbs partials
 hbs.registerPartials(__dirname + '/views/partials');

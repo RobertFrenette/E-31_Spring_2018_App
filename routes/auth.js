@@ -121,8 +121,11 @@ authRouter.post('/login', (req, res) => {
   let password = req.body.password;
   log.info(`Login: ${username}, ${password}`);
 
-  User.find({username: username, password: password}).then((users) => {
+  User.find({username: username, password: password})
+  .then((users) => {
     if (users.length > 0) {
+      // put username in session - validate on Home / Items page
+      req.session.username = username;
       log.info(`Login Successful for User: ${username}`);
       res.end();
     } else {
@@ -130,6 +133,10 @@ authRouter.post('/login', (req, res) => {
       res.status(400).send();
     }
   }, (err) => {
+    log.error(`Login Error: ${err}`);
+    res.status(400).send();
+  })
+  .catch((err) => {
     log.error(`Login Error: ${err}`);
     res.status(400).send();
   });

@@ -6,20 +6,23 @@ const log = require('log-util');
 // Mongoose Model
 const {Item} = require('./../models/item');
 
-itemRouter.get('/home/:username', (req, res) => {
-  let username = req.params.username;
+itemRouter.get('/home', (req, res) => {
+  // Validate we have username in session - set in login
+  var username = req.session.username;
   if (username) {
     log.info(`Items Page: ${username}`);
-    res.render('home.hbs', {pageTitle: 'Items'});
+    res.render('home.hbs', {pageTitle: 'Items', userName: username});
   } else {
     // username not passed
-    log.error(`Items Page - no username passed`);
-    res.status(500).send();
+    log.error(`Items Page - user not logged in`);
+    //res.status(500).send();
+    res.redirect('/error.html');
   }
 });
 
 itemRouter.get('/', (req, res) => {
-  let username = req.query.username;
+  // Validate we have username in session - set in login
+  var username = req.session.username;
   if (username) {
     log.info(`Get Items Request: ${username}`);
     Item.find({username: username}).then((items) => {
@@ -30,7 +33,7 @@ itemRouter.get('/', (req, res) => {
     });    
   } else {
     // username not passed
-    log.error(`Error: Get Items - no username passed`);
+    log.error(`Error: Get Items - user not logged in`);
     res.status(500).send();
   }
 });

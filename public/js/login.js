@@ -30,9 +30,7 @@ $(document).ready(function() {
         if (localStorargeSupported()) {
           localStorage.setItem('persistedData', JSON.stringify({"userName": userName.val(), "rememberMe": rememberMe.is(':checked'), "auth": true}));
         }
-
-        // call funct in utils.js
-        setLoginStatus(userName.val(), true, `/items/home/${userName.val().trim()}`) ;
+        document.location.href="/items/home/";
       })
       .fail(function(res) {
         errMsg.html('Login failed. Please try again.');

@@ -89,9 +89,7 @@ $(document).ready(function() {
     // Bind Event Handlers
     logoutLink.click(function(e) {
         e.preventDefault();
-
-        // call funct in utils.js
-        removeLoginStatus($('#userNameSpan').text(), false, '/') ;
+        document.location.href="/users/logout";
     });
 
     resetBtn.click(function() {
@@ -142,20 +140,8 @@ $(document).ready(function() {
         headers: { 0: { sorter: false}, 1: { sorter: false}, 2: { sorter: false} }
     });
     
-    // There really should be localStorage support...
-    if (localStorargeSupported()) {
-        if (getLoginStatus()) {
-            $('#userNameSpan').text(getPersistedUserName());
-            $('#homeContainer').removeClass('hidden');
-            $('#itemsDiv').removeClass('hidden');
-        } else {
-            document.location.href = '/error.html';
-        }
-    } else { // but, just in case...
-        $('#userNameSpan').text('');
-        $('#homeContainer').removeClass('hidden');
-        $('#itemsDiv').removeClass('hidden');
-    }
+    $('#homeContainer').removeClass('hidden');
+    $('#itemsDiv').removeClass('hidden');
 
     getAllItems();
 });
