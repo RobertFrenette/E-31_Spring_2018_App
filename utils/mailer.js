@@ -29,7 +29,7 @@ var mailOptions = {
 var sendRegMail = (username, email, URI) => {
     mailOptions.to = email;
     mailOptions.subject = `Welcome to myLists, ${username}!`;
-    mailOptions.html = `<h1>Welcome to myLists!</h1><p>You can access the site using this URL: http://${URI}<br /><br />Thanks,<br />The myLists Team</p>`;
+    mailOptions.html = `<h2>Welcome to myLists!</h2><p>You can access the site using this URL: http://${URI}<br /><br />Thanks,<br />The myLists Team</p>`;
     
     return transporter.sendMail(mailOptions)
     .then(
@@ -48,7 +48,7 @@ var sendResetMail = (email, URI) => {
   mailOptions.to = email;
   mailOptions.subject = `myLists Password Reset`;
   // Note: This should be more secure!
-  mailOptions.text = `Please use the following link to reset your myLists Password: ${URI}auth/confirm?email=${email}`;
+  mailOptions.html = `<h2>myLists Password Reset</h2><p>Please use the following link to reset your myLists Password: http://${URI}auth/confirm?email=${email}<br /><br />Thanks,<br />The myLists Team</p>`;
   
   return transporter.sendMail(mailOptions)
   .then(
