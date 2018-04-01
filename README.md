@@ -11,6 +11,19 @@ This Repo contains code for the [Companion App](http://www.mylistsapp.com/) deve
 ## Setup
 Clone / Fork / Download Repo then run ```npm install```.
 
+Set the following env vars (.env file)
+
+* DB_NAME
+* DB_USER
+* DB_USER_PWD
+
+* COOKIE_KEY
+* SESSION_KEY
+
+* EMAIL_ADDRESS
+* EMAIL_PASSWORD
+* EMAIL_SERVICE
+
 ## Execute
 ### Production
 ```
