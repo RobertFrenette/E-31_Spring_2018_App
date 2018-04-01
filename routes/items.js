@@ -7,6 +7,7 @@ const itemController  = require('../controllers/itemController');
 itemRouter.get('/home', itemController.getHome);
 itemRouter.get('/',     itemController.getItem);
 itemRouter.post('/',    itemController.postItem);
+itemRouter.get('/delete/:item_id', itemController.deleteItem);
  
 module.exports = itemRouter;
  

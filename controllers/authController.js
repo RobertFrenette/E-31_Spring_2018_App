@@ -16,7 +16,7 @@ AuthController.postReset = (req, res) => {
   let email = req.body.email;
   log.info(`Password Reset Request: ${email}`);
 
-  authService.postReset({email: email})
+  authService.postReset(email)
   .then((users) => {
     if (users.length > 0) {
       let uri = req.get('host') + '/';
@@ -40,9 +40,9 @@ AuthController.postConfirm = (req, res) => {
   log.info(`Password Reset Confirm: ${username}, ${email}, ${password}`);
 
   authService.postConfirm(username, email, password)
-  .then((users) => {
-    if (users.length > 0) {
-      log.info(`Confirm Success: Password updated for User: ${username}.`);
+  .then((user) => {
+    if (user) {
+      log.info(`Confirm Success: Password updated for User: ${user.username}.`);
       res.end();
     } else {
       // User not found

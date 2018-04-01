@@ -47,7 +47,6 @@ ItemController.postItem = (req, res) => {
   let itemname = req.body.name;
   let description = req.body.desc || ' ';
 
-
   itemService.findExistingItem(username, itemname)
   .then((items) => {
     if (items.length === 0) {
@@ -73,6 +72,18 @@ ItemController.postItem = (req, res) => {
   .catch((err) => {
     log.error(`Add Item Error: ${err}`);
     res.status(500).send();
+  });
+};
+
+ItemController.deleteItem = (req, res) => {
+  log.info(`Deleting Item: ${req.params.item_id}`);
+  itemService.delete(req.params.item_id)
+  .then((item) => {
+    res.redirect('/items/home');
+  })
+  .catch((err) => {
+      log.error(`Deleting Item error: ${err}`);
+      res.status(500).send();
   });
 };
  

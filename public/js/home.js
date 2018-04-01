@@ -37,14 +37,8 @@ $(document).ready(function() {
         var descTd = $(`<td>${desc}</td>`);
         var a = document.createElement('a');
 
-        a.setAttribute('href', `/items/${id}`);
+        a.setAttribute('href', `/items/delete/${id}`);
         a.innerHTML = '<i class="fa fa-trash-o" aria-hidden="true"></i>';
-        $(a).click((e) => {
-            e.preventDefault();
-
-            // AJAX DELETE TBD
-            alert('Functionality not yet implemented!');
-        });
         
         var deleteTd = $(`<td class="delete"></td>`);
         deleteTd.append(a);

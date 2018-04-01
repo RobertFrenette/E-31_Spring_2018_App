@@ -39,5 +39,15 @@ itemController.postItem = (itemObj) => {
   });
 };
 
+
+itemController.delete = (itemId) => {
+  return Item.findByIdAndRemove(itemId)
+  .then((item) => {
+      return item;
+  })
+  .catch((err) => {
+      throw err;
+  });
+};
 module.exports = itemController;
  
