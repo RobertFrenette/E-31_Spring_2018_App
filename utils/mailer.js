@@ -29,7 +29,7 @@ var mailOptions = {
 var sendRegMail = (username, email, URI) => {
     mailOptions.to = email;
     mailOptions.subject = `Welcome to myLists, ${username}!`;
-    mailOptions.text = `You can access the site using this URL: http://${URI}`;
+    mailOptions.html = `<h1>Welcome to myLists!</h1><p>You can access the site using this URL: http://${URI}<br /><br />Thanks,<br />The myLists Team</p>`;
     
     return transporter.sendMail(mailOptions)
     .then(
