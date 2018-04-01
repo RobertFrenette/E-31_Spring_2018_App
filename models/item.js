@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
 
 // Item Schema
-var Item = mongoose.model('Item', {
+var ItemSchema = new mongoose.Schema({
   username: {type: String, required: true},
   name:     {type: String, required:true},
   desc:     {type: String, required:false}
 });
 
-module.exports = {
-  Item
-};
+module.exports = mongoose.model('Item', ItemSchema);

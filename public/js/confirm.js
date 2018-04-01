@@ -37,7 +37,6 @@ $(document).ready(function() {
               url: '/auth/confirm'
         })
         .done(function(res) {
-          console.log(res);
           errMsg.removeClass('alert-danger');
           errMsg.addClass('alert-success');
           errMsg.html('Success: Your password has been reset.');

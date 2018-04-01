@@ -110,25 +110,8 @@ $(document).ready(function() {
         data.username = $('#userNameSpan').html();
         data.itemname = itemName.val().trim();
         data.description = description.val().trim();
-        
-      // AJAX POST
-      $.ajax({
-        type: 'POST',
-        data: JSON.stringify(data),
-            contentType: 'application/json',
-            url: '/lists/'
-      })
-      .done(function(res) {
-        // Item successfully persisted on server
-        addNewItem(0, itemName.val().trim(), description.val().trim());
 
-        itemName.focus();
-      })
-      .fail(function(res) {
-        errMsg.html(`Error:  Unable to save Item ${data.itemname} to list.`);
-        errMsg.show();
-        itemName.focus();
-      });
+        addNewItem(0, itemName.val().trim(), description.val().trim());
     });
     
     registerLink.hide();

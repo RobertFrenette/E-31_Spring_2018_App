@@ -44,7 +44,7 @@ $(document).ready(function() {
           if (res.status === 400) {
             msg = '<br />Error: A User with these credentials already exists.';
             confirm.val('');
-            password.focus();
+            confirm.focus();
           }
         
           errMsg.html(`Registration failed. Please try again.${msg}`);

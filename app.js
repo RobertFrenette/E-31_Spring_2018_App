@@ -1,23 +1,24 @@
 require('dotenv').config();
 
 // Node Modules
-const url = require('url');
+const url  = require('url');
 const path = require('path');
-const fs = require('fs');
+const fs   = require('fs');
 
 // Third-Party Modules
-const express = require('express');
-const hbs = require('hbs');
-const log = require('log-util');
-const bodyParser = require('body-parser');
-const session = require('express-session');
+const express      = require('express');
+const hbs          = require('hbs');
+const log          = require('log-util');
+const bodyParser   = require('body-parser');
+const session      = require('express-session');
 const cookieParser = require('cookie-parser');
 
 // include routes
 const users = require('./routes/users');
-const auth = require('./routes/auth');
+const auth  = require('./routes/auth');
 const items = require('./routes/items');
 
+// init DB Connection
 const {mongoose} = require('./db/mongoose');
 
 var app = express();

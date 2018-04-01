@@ -25,7 +25,6 @@ $(document).ready(function() {
             url: '/auth/reset'
       })
       .done(function(res) {
-        console.log(res);
         errMsg.removeClass('alert-danger');
         errMsg.addClass('alert-success');
         errMsg.html('Success: Please check your email.');
