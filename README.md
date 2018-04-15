@@ -33,7 +33,9 @@ npm run start-dev
 ```
 
 ## Load App
-[http://localhost:8080](http://localhost:8080)
+Note: The current implementation consists of REST API Routes with will be invoked from Angular front-end (TBD).
+
+Until front-end is implmented, you should interact with the App using the included [Postman Collection](https://github.com/RobertFrenette/E-31_Spring_2018_App/tree/master/postman).
 
 
 ## Deployment Steps
