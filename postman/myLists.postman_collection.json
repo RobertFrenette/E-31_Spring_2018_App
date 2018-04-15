@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "4b236cb7-4e6c-47b5-9751-1680eb792fba",
+		"name": "myLists",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/api/register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"\",\n\t\"email\": \"\",\n\t\"password\": \"\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"register"
+					]
+				},
+				"description": "Register a User"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"\",\n\t\"password\": \"\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "User Login"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/reset",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/reset",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reset"
+					]
+				},
+				"description": "User Password Reset request"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/confirm",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"\",\n\t\"email\": \"\",\n\t\"password\": \"\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/confirm",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"confirm"
+					]
+				},
+				"description": "User password reset confirmation"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/item",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user_id\": \"\",\n\t\"itemname\": \"\",\n\t\"description\": \"\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/item",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"item"
+					]
+				},
+				"description": "Post a new Item for a specific User"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/item/123",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/api/item/123",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"item",
+						"123"
+					]
+				},
+				"description": "Get all Items for a specific User"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/item/123",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/api/item/123",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"item",
+						"123"
+					]
+				},
+				"description": "Delete an Item by _id"
+			},
+			"response": []
+		}
+	]
+}

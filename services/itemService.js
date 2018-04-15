@@ -4,8 +4,8 @@ const Item = require('../models/item');
 var itemController = {};
 
 
-itemController.getItem = (username) => {
-    return Item.find({username: username})
+itemController.getItem = (user_id) => {
+    return Item.find({user_id: user_id})
     .then((items) => {
         return items;
     })
@@ -15,10 +15,10 @@ itemController.getItem = (username) => {
 };
  
 
-itemController.findExistingItem = (username, itemname) => {
+itemController.findExistingItem = (user_id, itemname) => {
   var query = Item.find()
   .and([
-    { $and: [{username: username}, {name: itemname}] }
+    { $and: [{user_id: user_id}, {name: itemname}] }
   ]);
   var promise = query.exec();
 
@@ -43,10 +43,10 @@ itemController.postItem = (itemObj) => {
 itemController.delete = (itemId) => {
   return Item.findByIdAndRemove(itemId)
   .then((item) => {
-      return item;
+    return item;
   })
   .catch((err) => {
-      throw err;
+    throw err;
   });
 };
 module.exports = itemController;

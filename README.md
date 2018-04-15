@@ -17,9 +17,6 @@ Set the following env vars (.env file)
 * DB_USER
 * DB_USER_PWD
 
-* COOKIE_KEY
-* SESSION_KEY
-
 * EMAIL_ADDRESS
 * EMAIL_PASSWORD
 * EMAIL_SERVICE

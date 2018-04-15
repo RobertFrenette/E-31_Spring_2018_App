@@ -4,12 +4,57 @@ const mailer      = require('./../utils/mailer');
 
 var AuthController = {};
 
-AuthController.getReset = (req, res) => {
-  res.render('reset.hbs', {pageTitle: 'Password Reset'});
+AuthController.postRegister = (req, res) => {
+  let username = req.body.username;
+  let email = req.body.email;
+  let password = req.body.password;
+  log.info(`Register: ${username}, ${email}, ${password}`);
+
+  authService.findExistingUser(username, email)
+  .then((users) => {
+    if (users.length === 0) {
+      authService.postRegister(username, email, password)
+      .then(() => {
+        let uri = req.get('host') + '/';
+        log.info(`Registration Successful for User: ${username}`);
+        mailer.sendRegMail(username, email, uri);
+        res.end();
+      })
+      .catch((err) => {
+        log.error(`Registration Error: ${err}`);
+        res.status(400).send();
+      });
+    } else {
+      // User already registered
+      log.error(`Registration Error: User with creds ${username} and/or ${email}, ${password} already registered.`);
+      res.status(400).send();
+    }
+  })
+  .catch((err) => {
+    log.error(`Registration Error: ${err}`);
+    res.status(400).send();
+  });
 };
 
-AuthController.getConfirm = (req, res) => {
-  res.render('confirm.hbs', {pageTitle: 'Password Reset', qry_email_Address: req.query.email});
+AuthController.postLogin = (req, res) => {
+  let username = req.body.username;
+  let password = req.body.password;
+  log.info(`Login: ${username}, ${password}`);
+
+  authService.postLogin(username, password)
+  .then((users) => {
+    if (users.length > 0) {
+      log.info(`Login Successful for User: ${username}`);
+      res.json({'_id': users[0]._id});
+    } else {
+      log.error(`Login Unsucessful for User: ${username}, ${password}`);
+      res.status(400).send();
+    }
+  })
+  .catch((err) => {
+    log.error(`Login Error: ${err}`);
+    res.status(400).send();
+  });
 };
 
 AuthController.postReset = (req, res) => {
@@ -52,64 +97,6 @@ AuthController.postConfirm = (req, res) => {
   })
   .catch((err) => {
     log.error(`Confirm Error: ${err}`);
-    res.status(400).send();
-  });
-};
-
-AuthController.postRegister = (req, res) => {
-  let username = req.body.username;
-  let email = req.body.email;
-  let password = req.body.password;
-  log.info(`Register: ${username}, ${email}, ${password}`);
-
-  authService.findExistingUser(username, email)
-  .then((users) => {
-    if (users.length === 0) {
-      authService.postRegister(username, email, password)
-      .then(() => {
-        let uri = req.get('host') + '/';
-        log.info(`Registration Successful for User: ${username}`);
-        mailer.sendRegMail(username, email, uri);
-        res.end();
-      })
-      .catch((err) => {
-        log.error(`Registration Error: ${err}`);
-        res.status(400).send();
-      });
-    } else {
-      // User already registered
-      log.error(`Registration Error: User with creds ${username} and/or ${email}, ${password} already registered.`);
-      res.status(400).send();
-    }
-  })
-  .catch((err) => {
-    log.error(`Registration Error: ${err}`);
-    res.status(400).send();
-  });
-};
-
-AuthController.postLogin = (req, res) => {
-  let username = req.body.username;
-  let password = req.body.password;
-  log.info(`Login: ${username}, ${password}`);
-
-  authService.postLogin(username, password)
-  .then((users) => {
-    if (users.length > 0) {
-      // put username in session - validate on Home / Items page
-      req.session.username = username;
-      log.info(`Login Successful for User: ${username}`);
-      res.end();
-    } else {
-      log.info(`Login Unsucessful for User: ${username}, ${password}`);
-      res.status(400).send();
-    }
-  }, (err) => {
-    log.error(`Login Error: ${err}`);
-    res.status(400).send();
-  })
-  .catch((err) => {
-    log.error(`Login Error: ${err}`);
     res.status(400).send();
   });
 };

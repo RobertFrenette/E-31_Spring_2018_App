@@ -3,33 +3,15 @@ const itemService = require('../services/itemService');
 
 var ItemController = {};
 
-ItemController.getHome = (req, res) => {
-  // Validate we have username in session - set in login
-  var username = req.session.username;
-  if (username) {
-    log.info(`Items Page: ${username}`);
-    res.render('home.hbs', {pageTitle: 'Items', userName: username});
-  } else {
-    // username not passed
-    log.error(`Items Page - user not logged in`);
-    //res.status(500).send();
-    res.redirect('/error.html');
-  }
-};
-
 ItemController.getItem = (req, res) => {
-  // Validate we have username in session - set in login
-  var username = req.session.username;
-  if (username) {
-    log.info(`Get Items Request: ${username}`);
+  let user_id = req.params.user_id;
+
+  if (user_id) {
+    log.info(`Get Items Request: ${user_id}`);
     
-    itemService.getItem(username)
+    itemService.getItem(user_id)
     .then((items) => {
-      if (items.length > 0) {
-        res.end(JSON.stringify(items));
-      } else {
-        res.status(500).send();
-      }
+      res.json(items);
     })
     .catch((err) => {
       log.error(`Get Items Error: ${err}`);
@@ -43,20 +25,20 @@ ItemController.getItem = (req, res) => {
 };
 
 ItemController.postItem = (req, res) => {
-  let username = req.body.username;
-  let itemname = req.body.name;
-  let description = req.body.desc || ' ';
+  let user_id = req.body.user_id;
+  let itemname = req.body.itemname;
+  let description = req.body.description || ' ';
 
-  itemService.findExistingItem(username, itemname)
+  itemService.findExistingItem(user_id, itemname)
   .then((items) => {
     if (items.length === 0) {
       itemService.postItem({
-        username: username,
+        user_id: user_id,
         name: itemname,
         desc: description
       })
       .then((items) => {
-        res.status(200).send(items);
+        res.json(items);
       })
       .catch((err) => {
         log.error(`Add Item Error: ${err}`);
@@ -65,7 +47,7 @@ ItemController.postItem = (req, res) => {
 
     } else {
       // Item exists
-      log.error(`Add Item Error: Item with name ${itemname} already esists for User ${username}.`);
+      log.error(`Add Item Error: Item with name ${itemname} already esists for User ${user_id}.`);
       res.status(400).send();
     }
   })
@@ -79,7 +61,12 @@ ItemController.deleteItem = (req, res) => {
   log.info(`Deleting Item: ${req.params.item_id}`);
   itemService.delete(req.params.item_id)
   .then((item) => {
-    res.redirect('/items/home');
+    if (item) {
+      res.end();
+    } else {
+      log.error(`Delete Item Error: Item ${req.params.item_id} not found.`);
+      res.status(400).send();
+    }
   })
   .catch((err) => {
       log.error(`Deleting Item error: ${err}`);
