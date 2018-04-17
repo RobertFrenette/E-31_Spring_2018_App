@@ -9,7 +9,10 @@ export class ResetComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  onSubmit(): void {
+    // TBD
   }
 
 }

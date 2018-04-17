@@ -9,7 +9,10 @@ export class ConfirmComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  onSubmit(): void {
+    //  TBD
   }
 
 }

@@ -10,11 +10,14 @@ export class RegisterComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  onSubmit(): void {
+    // TBD
+  }
 
   onLogin(): void {
     this.router.navigate(['login']);
   }
-
 
 }

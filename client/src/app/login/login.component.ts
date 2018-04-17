@@ -8,15 +8,21 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  userName: String = '';
+
   constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onRegister(): void {
     this.router.navigate(['register']);
   }
 
-  onReset(): void {
+  onSubmit(): void {
+    this.router.navigate(['dashboard', {userName: this.userName}]);
+  }
+
+  onPasswordReset(): void {
     this.router.navigate(['reset']);
   }
 

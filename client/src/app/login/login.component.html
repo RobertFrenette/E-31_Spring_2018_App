@@ -3,7 +3,7 @@
   <form id="loginForm">
     <div class="form-group">
       <label for="userName">User Name</label>
-      <input type="text" class="form-control" id="userName" placeholder="Enter your User Name" required autofocus />
+      <input type="text" class="form-control" id="userName" name="userName" placeholder="Enter your User Name" required autofocus [(ngModel)]="userName" />
     </div>
     <div class="form-group">
       <label for="password">Password</label>
@@ -14,7 +14,7 @@
       <label class="form-check-label" for="rememberMe">Remember Me</label>
     </div>
     <br />
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="button" class="btn btn-primary" (click)="onSubmit()">Login</button>
     <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
   </form>
 </div>
@@ -24,5 +24,5 @@
   <br />Don't have an account?
   <span title="Register" class="anchor" (click)="onRegister()">Register.</span>
   <br />Forgot your password?
-  <span title="Reset Password" class="anchor" (click)="onReset()">Reset.</span>
+  <span title="Reset Password" class="anchor" (click)="onPasswordReset()">Reset.</span>
 </div>
