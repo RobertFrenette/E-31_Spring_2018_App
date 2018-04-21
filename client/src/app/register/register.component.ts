@@ -17,6 +17,13 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(f:any): void {
     console.log('submit');
+    if (f.password !== f.confirm) {
+      this.errmsg = 'Passwords must match!'
+      this.error = true;
+    } else {
+      // TBD
+      this.router.navigate(['login']);
+    }
     /*
     userName
     email

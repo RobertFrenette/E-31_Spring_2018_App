@@ -5,7 +5,8 @@
       <label for="email">Email</label>
       <input type="email" class="form-control" 
             id="email" name="email" ngModel #email="ngModel"
-            placeholder="Enter your Email Address" required autofocus />
+            placeholder="Enter your Email Address" required autofocus 
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
     <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
