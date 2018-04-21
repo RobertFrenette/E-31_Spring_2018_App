@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AuthService } from './../providers/auth.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,10 +11,12 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   userName: String = '';
-  error = true;
-  errmsg = "This is a test.";
+  error = false;
+  errmsg = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router) {}
 
   ngOnInit() { }
 
@@ -20,13 +24,29 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['register']);
   }
 
-  onSubmit(): void {
-    console.log('submit');
-    /*
-    userName
-    password
-    */
-    this.router.navigate(['dashboard', {userName: this.userName}]);
+  onSubmit(f:any): void {
+    if (f.userName === '' || f.password === '') {
+      this.errmsg = 'User Name and Password are required.';
+      this.error = true;
+    } else {
+      this.authService.login(f.userName, f.password)
+      .subscribe(
+        result => {
+          // Handle result
+          //console.log(result);
+        },
+        error => {
+          //console.log(error);
+          this.errmsg = 'Login unsuccessful.';
+          this.error = true;
+        },
+        () => {
+          // 'onCompleted' callback.
+          // No errors, route to new page here
+          this.router.navigate(['dashboard', {userName: this.userName}]);
+        }
+      );
+    }
   }
 
   onPasswordReset(): void {

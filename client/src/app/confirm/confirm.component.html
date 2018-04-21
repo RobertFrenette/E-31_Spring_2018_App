@@ -10,9 +10,10 @@
     <div class="form-group">
       <label for="email">Email address</label>
       <input type="email" class="form-control" 
-            id="email" name="email" ngModel #email="ngModel"
+            id="email" name="email" [(ngModel)]="emailAddress" #email="ngModel"
             placeholder="Enter your Email Address" required 
-            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+            disabled />
     </div>
     <div class="form-group">
       <label for="password">Password</label>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
+import { AuthService } from './../providers/auth.service';
 
 @Component({
   selector: 'app-confirm',
@@ -8,29 +10,51 @@ import { Router } from '@angular/router';
 })
 export class ConfirmComponent implements OnInit {
 
-  error = true;
-  errmsg = "This is a test.";
-  pwdreset = true;
+  emailAddress = '';
+  error = false;
+  errmsg = '';
+  pwdreset = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    // subscribe to router event
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      this.emailAddress  = params['email'];
+    });
+   }
 
-  onSubmit(f:any): void {
-    console.log('submit');
-    if (f.password !== f.confirm) {
-      this.errmsg = 'Passwords must match!'
+   onSubmit(f:any): void {
+    if (f.userName === '' || f.email === '' || f.password === '' || f.confirm === '') {
+      this.errmsg = 'All fields are required.';
       this.error = true;
     } else {
-      // TBD
-      this.router.navigate(['login']);
+      if (f.password !== f.confirm) {
+        this.errmsg = 'Passwords must match!'
+        this.error = true;
+      } else {
+        this.authService.confirm(f.userName, this.emailAddress, f.password)
+        .subscribe(
+          result => {
+            // Handle result
+            //console.log(result);
+          },
+          error => {
+            //console.log(error);
+            this.errmsg = 'Unsuccessful.';
+            this.error = true;
+          },
+          () => {
+            // 'onCompleted' callback.
+            this.error = false;
+            this.pwdreset = true;
+          }
+        );
+      }
     }
-    /*
-    userName
-    email
-    password
-    confirm
-    */
   }
 
   onLogin(): void {
