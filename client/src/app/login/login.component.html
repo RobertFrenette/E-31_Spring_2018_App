@@ -1,26 +1,30 @@
 <h1>Login</h1>
 <div class="container">
-  <form id="loginForm">
+  <form id="loginForm" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
     <div class="form-group">
       <label for="userName">User Name</label>
-      <input type="text" class="form-control" id="userName" name="userName" placeholder="Enter your User Name" required autofocus [(ngModel)]="userName" />
+      <input type="text" class="form-control" 
+            id="userName" name="userName" ngModel #userName="ngModel"
+            placeholder="Enter your User Name" required autofocus />
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="Enter your Password" required />
+      <input type="password" class="form-control" 
+            id="password" name="password" ngModel #password="ngModel"
+            placeholder="Enter your Password" required />
     </div>
     <div class="form-check rememberMe">
       <input type="checkbox" class="form-check-input" id="rememberMe" />
       <label class="form-check-label" for="rememberMe">Remember Me</label>
     </div>
     <br />
-    <button type="button" class="btn btn-primary" (click)="onSubmit()">Login</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Login</button>
     <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
   </form>
 </div>
 <div class="container">
   <br />
-  <div class="alert alert-danger hidden" role="alert" id="errMsg"></div>
+  <div class="alert alert-danger hidden" role="alert" id="errMsg" *ngIf="error == true">{{errmsg}}</div>
   <br />Don't have an account?
   <span title="Register" class="anchor" (click)="onRegister()">Register.</span>
   <br />Forgot your password?

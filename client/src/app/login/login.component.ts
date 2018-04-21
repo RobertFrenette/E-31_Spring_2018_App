@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   userName: String = '';
+  error = true;
+  errmsg = "This is a test.";
 
   constructor(private router: Router) {}
 
@@ -19,6 +21,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log('submit');
+    /*
+    userName
+    password
+    */
     this.router.navigate(['dashboard', {userName: this.userName}]);
   }
 

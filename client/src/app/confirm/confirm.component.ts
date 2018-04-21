@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-confirm',
@@ -7,12 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmComponent implements OnInit {
 
-  constructor() { }
+  error = true;
+  errmsg = "This is a test.";
+  pwdreset = true;
+
+  constructor(private router: Router) {}
 
   ngOnInit() { }
 
-  onSubmit(): void {
-    //  TBD
+  onSubmit(f:any): void {
+    console.log('submit');
+    /*
+    userName
+    email
+    password
+    confirm
+    */
   }
 
+  onLogin(): void {
+    this.router.navigate(['login']);
+  }
 }

@@ -8,12 +8,21 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
+  error = false;
+  errmsg = "";
+
   constructor(private router: Router) {}
 
   ngOnInit() { }
 
-  onSubmit(): void {
-    // TBD
+  onSubmit(f:any): void {
+    console.log('submit');
+    /*
+    userName
+    email
+    password
+    confirm
+    */
   }
 
   onLogin(): void {

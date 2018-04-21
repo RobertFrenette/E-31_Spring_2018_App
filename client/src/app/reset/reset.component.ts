@@ -6,13 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reset.component.css']
 })
 export class ResetComponent implements OnInit {
+  error = true;
+  errmsg = "This is a test.";
+  emailsent = true;
 
   constructor() { }
 
   ngOnInit() { }
 
-  onSubmit(): void {
-    // TBD
+  onSubmit(f:any): void {
+    console.log('submit');
+    /*
+    email
+    */
   }
 
 }

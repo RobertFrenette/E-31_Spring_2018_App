@@ -1,31 +1,39 @@
 <h1>Password Reset</h1>
 <div class="container">
-  <form id="confirmForm">
+  <form id="confirmForm" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
     <div class="form-group">
       <label for="userName">User Name</label>
-      <input type="text" class="form-control" id="userName" placeholder="Enter a User Name" required autofocus />
+      <input type="text" class="form-control" 
+            id="userName" name="userName" ngModel #userName="ngModel"
+            placeholder="Enter a User Name" required autofocus />
     </div>
     <div class="form-group">
       <label for="email">Email address</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter your Email Address" required />
+      <input type="email" class="form-control" 
+            id="email" name="email" ngModel #email="ngModel"
+            placeholder="Enter your Email Address" required />
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="Enter a Password" required />
+      <input type="password" class="form-control" 
+            id="password" name="password" ngModel #password="ngModel"
+            placeholder="Enter a Password" minlength="8" required />
     </div>
     <div class="form-group">
       <label for="confirm">Confirm</label>
-      <input type="password" class="form-control" id="confirm" placeholder="Confirm your password" required />
+      <input type="password" class="form-control" 
+            id="confirm" name="confirm" ngModel #confirm="ngModel"
+            placeholder="Confirm your password" minlength="8" required />
     </div>
-    <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
     <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
   </form>
 </div>
 <div class="container">
   <br />
-  <div class="alert alert-danger hidden" role="alert" id="errMsg"></div>
-  <div class="alert alert-success hidden" role="alert" id="successMsg">Your password has been reset. Please
-    <a href="login.html">Login</a>.</div>
+  <div class="alert alert-danger hidden" role="alert" id="errMsg" *ngIf="error == true">{{errmsg}}</div>
+  <div class="alert alert-success hidden" role="alert" id="successMsg" *ngIf="pwdreset == true">Your password has been reset. Please
+    <span title="Login" class="anchor" (click)="onLogin()">login</span>.</div>
   Already have an account?
-  <a href="login.html" title="Login">Login now.</a>
+  <span title="Login" class="anchor" (click)="onLogin()">Login now.</span>
 </div>

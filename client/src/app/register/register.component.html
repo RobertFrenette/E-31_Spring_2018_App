@@ -1,33 +1,39 @@
 <h1>Register</h1>
 <div class="container">
-  <form id="registerForm">
+  <form id="registerForm" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
     <div class="form-group">
       <label for="userName">User Name</label>
-      <input type="text" class="form-control" id="userName" placeholder="Enter a User Name" required autofocus />
+      <input type="text" class="form-control" 
+            id="userName" name="userName" ngModel #userName="ngModel"
+            placeholder="Enter a User Name" required autofocus />
     </div>
     <div class="form-group">
       <label for="email">Email address</label>
-      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter your Email Address" required
-      />
+      <input type="email" class="form-control" 
+            id="email" name="email" ngModel #email="ngModel"
+            placeholder="Enter your Email Address" aria-describedby="emailHelp" required/>
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Enter a Password"
-        required />
+      <input type="password" class="form-control" 
+            id="password" name="password" ngModel #password="ngModel"
+            placeholder="Enter a Password" aria-describedby="passwordHelp" minlength="8" required />
       <small id="passwordHelp" class="form-text text-muted">Password must be at least 8 characters.</small>
     </div>
     <div class="form-group">
       <label for="confirm">Confirm</label>
-      <input type="password" class="form-control" id="confirm" placeholder="Confirm your password" required />
+      <input type="password" class="form-control" 
+            id="confirm" name="confirm" ngModel #confirm="ngModel"
+            placeholder="Confirm your password" minlength="8" required />
     </div>
-    <button type="button" class="btn btn-primary" (click)="onSubmit()">Register</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Register</button>
     <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
   </form>
 </div>
 <div class="container">
   <br />
-  <div class="alert alert-danger hidden" role="alert" id="errMsg"></div>
+  <div class="alert alert-danger hidden" role="alert" id="errMsg" *ngIf="error == true">{{errmsg}}</div>
   Already have an account?
   <span title="Login" class="anchor" (click)="onLogin()">Login now.</span>
 </div>

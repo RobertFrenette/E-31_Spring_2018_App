@@ -1,21 +1,25 @@
 <h1>Items (<span id="userNameSpan">{{userName}}</span>)</h1>
 <div class="container">
-  <form id="addItemForm">
+  <form id="addItemForm" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
     <div class="form-group">
       <label for="itemName">Item Name</label>
-      <input type="text" class="form-control" id="itemName" placeholder="Enter an Item Name" required autofocus />
+      <input type="text" class="form-control" 
+            id="itemName" name="itemName" ngModel #itemName="ngModel"
+            placeholder="Enter an Item Name" required autofocus />
     </div>
     <div class="form-group">
       <label for="description">Description</label>
-      <input type="text" class="form-control" id="description" placeholder="(optional)" />
+      <input type="text" class="form-control" 
+            id="description" name="description" ngModel #description="ngModel"
+            placeholder="(optional)" />
     </div>
-    <button type="button" class="btn btn-primary" (click)="onSubmit()">Add Item</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Add Item</button>
     <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
   </form>
 </div>
 <div class="container" id="itemsDiv">
   <br />
-  <div class="alert alert-warning hidden" role="alert" id="errMsg"></div>
+  <div class="alert alert-warning hidden" role="alert" id="warningMsg" *ngIf="warning == true">{{warningmsg}}</div>
   <hr />
   <h3>Items</h3>
   <table id="myTable" class="tablesorter">

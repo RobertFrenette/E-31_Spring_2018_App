@@ -9,6 +9,8 @@ import { ActivatedRoute} from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   userName = '';
+  warning = true;
+  warningmsg = "This is a test.";
 
   constructor(private route: ActivatedRoute) { }
 
@@ -17,7 +19,11 @@ export class DashboardComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // TBD
+    console.log('submit');
+    /*
+    itemName
+    description
+    */
   }
 
 }
