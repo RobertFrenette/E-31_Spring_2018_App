@@ -4,8 +4,19 @@ const Item = require('../models/item');
 var itemController = {};
 
 
-itemController.getItem = (user_id) => {
-    return Item.find({user_id: user_id})
+itemController.getItems = (user_id) => {
+  return Item.find({user_id: user_id})
+  .then((items) => {
+      return items;
+  })
+  .catch((err) => {
+    throw err;
+  });    
+};
+
+
+itemController.getItem = (item_id) => {
+    return Item.find({_id: item_id})
     .then((items) => {
         return items;
     })

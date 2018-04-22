@@ -168,7 +168,7 @@
 						"123"
 					]
 				},
-				"description": "Get all Items for a specific User"
+				"description": "Get aa specific Item by Item _id"
 			},
 			"response": []
 		},
@@ -191,6 +191,28 @@
 					]
 				},
 				"description": "Delete an Item by _id"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/items/123",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/api/items/123",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"items",
+						"123"
+					]
+				},
+				"description": "Get all Items for a specific User by User _id"
 			},
 			"response": []
 		}

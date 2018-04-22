@@ -25,7 +25,8 @@ router.post('/reset',    authController.postReset);
 router.post('/confirm',  authController.postConfirm);
 
 // Item Routes
-router.get('/item/:user_id',    itemController.getItem);
+router.get('/items/:user_id',   itemController.getItems);
+router.get('/item/:item_id',    itemController.getItem);
 router.post('/item/',           itemController.postItem);
 router.delete('/item/:item_id', itemController.deleteItem);
 
