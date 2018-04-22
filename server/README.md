@@ -16,18 +16,16 @@ Set the following env vars (.env file)
 ## Execute
 ### Production
 ```
-npm start
+$ npm start
 ```
 
 ### Development (nodemon)
 ```
-npm run start-dev
+$ npm run start-dev
 ```
 
 ## Test App
-Note: The current implementation consists of REST API Routes which will be invoked from Angular front-end (TBD).
-
-Until front-end is implmented, you should interact with the App using the included [Postman Collection](https://github.com/RobertFrenette/E-31_Spring_2018_App/tree/master/server/postman).
+You can test the App using this [Postman Collection](https://github.com/RobertFrenette/E-31_Spring_2018_App/tree/master/server/postman).
 
 ## Deployment Steps
 #### SSH into your Cloud Server from your Dev Machine

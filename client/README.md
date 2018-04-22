@@ -1,7 +1,13 @@
 # CSCI E-31: Companion App - Angular Client
 
-Note: The code in this Repo is a work-in-progress and is being posted for Students in the 
-Spring, 2018 CSCI E-31 Introduction to Web Application Development using Node.js (MEAN Stack) course
-at Harvard Extension School.
+## Setup
+Clone / Fork / Download Repo then run ```npm install```.
 
-The code will evolve as Angular topics are coverd in the course.
+## Execute
+```
+$ ng serve
+```
+
+## Test App (Browser)
++ Ensure Node Server is started! 
+[http://localhost:4200](http://localhost:4200).
