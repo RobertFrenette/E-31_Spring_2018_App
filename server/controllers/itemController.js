@@ -3,13 +3,34 @@ const itemService = require('../services/itemService');
 
 var ItemController = {};
 
-ItemController.getItem = (req, res) => {
+ItemController.getItems = (req, res) => {
   let user_id = req.params.user_id;
 
   if (user_id) {
     log.info(`Get Items Request: ${user_id}`);
     
-    itemService.getItem(user_id)
+    itemService.getItems(user_id)
+    .then((items) => {
+      res.json(items);
+    })
+    .catch((err) => {
+      log.error(`Get Items Error: ${err}`);
+      res.status(500).send();
+    });
+  } else {
+    // username not passed
+    log.error(`Error: Get Items - user not logged in`);
+    res.status(500).send();
+  }
+};
+
+ItemController.getItem = (req, res) => {
+  let item_id = req.params.item_id;
+
+  if (item_id) {
+    log.info(`Get Item Request: ${item_id}`);
+    
+    itemService.getItem(item_id)
     .then((items) => {
       res.json(items);
     })
