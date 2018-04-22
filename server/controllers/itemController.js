@@ -83,7 +83,8 @@ ItemController.deleteItem = (req, res) => {
   itemService.delete(req.params.item_id)
   .then((item) => {
     if (item) {
-      res.end();
+      //res.end();
+      res.json(item);
     } else {
       log.error(`Delete Item Error: Item ${req.params.item_id} not found.`);
       res.status(400).send();
