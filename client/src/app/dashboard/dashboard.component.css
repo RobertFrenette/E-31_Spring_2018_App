@@ -1,0 +1,8 @@
+table {
+  width: 90%;
+}
+
+.fa-trash-o:hover {
+  cursor: pointer;
+  color: red;
+}

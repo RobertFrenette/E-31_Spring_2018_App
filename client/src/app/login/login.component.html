@@ -4,7 +4,7 @@
     <div class="form-group">
       <label for="userName">User Name</label>
       <input type="text" class="form-control" 
-            id="userName" name="userName" ngModel #userName="ngModel"
+            id="userName" name="userName" ngModel  #userName="ngModel"
             placeholder="Enter your User Name" required autofocus />
     </div>
     <div class="form-group">
@@ -13,10 +13,12 @@
             id="password" name="password" ngModel #password="ngModel"
             placeholder="Enter your Password" required />
     </div>
+    <!--
     <div class="form-check rememberMe">
-      <input type="checkbox" class="form-check-input" id="rememberMe" />
+      <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe" ngModel #rememberMe="ngModel"/>
       <label class="form-check-label" for="rememberMe">Remember Me</label>
     </div>
+    -->
     <br />
     <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Login</button>
     <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>

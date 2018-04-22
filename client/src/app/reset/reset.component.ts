@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from './../providers/auth.service';
+import { AuthService } from './../providers/auth/auth.service';
 
 @Component({
   selector: 'app-reset',

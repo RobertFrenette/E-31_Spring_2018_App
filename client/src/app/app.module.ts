@@ -14,7 +14,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavComponent } from './nav/nav.component';
 
-import { AuthService } from './providers/auth.service';
+import { AuthService } from './providers/auth/auth.service';
+import { ItemService } from './providers/item/item.service';
 
 const appRoutes: Routes = [
   {path: '', component:HomeComponent },
@@ -43,7 +44,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    ItemService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

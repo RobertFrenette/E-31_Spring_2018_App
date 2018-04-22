@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from './../providers/auth.service';
+import { AuthService } from './../providers/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +13,23 @@ export class LoginComponent implements OnInit {
   userName: String = '';
   error = false;
   errmsg = '';
+  _id = '';
 
   constructor(
     private authService: AuthService, 
     private router: Router) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    /*
+    let persistedName = localStorage.getItem('user_name');
+
+    if (persistedName !== null) {
+      this.userName = JSON.parse(persistedName);
+    } else {
+      this.userName = '';
+    }
+    */
+  }
 
   onRegister(): void {
     this.router.navigate(['register']);
@@ -34,6 +45,7 @@ export class LoginComponent implements OnInit {
         result => {
           // Handle result
           //console.log(result);
+          this._id = result._id;
         },
         error => {
           //console.log(error);
@@ -42,8 +54,18 @@ export class LoginComponent implements OnInit {
         },
         () => {
           // 'onCompleted' callback.
+          // Check "Remeber Me"
+          /*
+          if (!f.rememberMe) {
+            localStorage.removeItem('user_name');
+            console.log(localStorage.getItem('user_name'));
+          } else {
+            localStorage.setItem('user_name', JSON.stringify(f.userName));
+            console.log(localStorage.getItem('user_name'));
+          }
+          */
           // No errors, route to new page here
-          this.router.navigate(['dashboard', {userName: this.userName}]);
+          this.router.navigate(['dashboard', {userName: f.userName, _id: this._id}]);
         }
       );
     }

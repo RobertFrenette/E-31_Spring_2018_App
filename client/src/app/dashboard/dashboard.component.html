@@ -22,7 +22,7 @@
   <div class="alert alert-warning hidden" role="alert" id="warningMsg" *ngIf="warning == true">{{warningmsg}}</div>
   <hr />
   <h3>Items</h3>
-  <table id="myTable" class="tablesorter">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Item Name</th>
@@ -30,6 +30,11 @@
         <th>&nbsp;</th>
       </tr>
     </thead>
+    <tr *ngFor="let item of items">
+      <td>{{item.name}}</td>
+      <td>{{item.desc}}</td>
+      <td><i class="fa fa-trash-o" (click)="delete(item._id)"></i></td>
+    </tr>
     <tbody id="itemsList"></tbody>
   </table>
 </div>
