@@ -16,6 +16,7 @@ import { NavComponent } from './nav/nav.component';
 
 import { AuthService } from './providers/auth/auth.service';
 import { ItemService } from './providers/item/item.service';
+import { NavService } from './providers/nav/nav.service';
 
 const appRoutes: Routes = [
   {path: '', component:HomeComponent },
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     AuthService,
-    ItemService
+    ItemService,
+    NavService
   ],
   bootstrap: [AppComponent]
 })

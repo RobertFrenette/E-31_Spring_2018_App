@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from './../providers/auth/auth.service';
+import { NavService } from '../providers/nav/nav.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   _id = '';
 
   constructor(
+    private navService: NavService,
     private authService: AuthService, 
     private router: Router) {}
 
@@ -64,6 +66,7 @@ export class LoginComponent implements OnInit {
             console.log(localStorage.getItem('user_name'));
           }
           */
+          this.navService.sendMessage(true);
           // No errors, route to new page here
           this.router.navigate(['dashboard', {userName: f.userName, _id: this._id}]);
         }
