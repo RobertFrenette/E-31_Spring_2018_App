@@ -27,7 +27,8 @@ router.post('/confirm',  authController.postConfirm);
 // Item Routes
 router.get('/items/:user_id',   itemController.getItems);
 router.get('/item/:item_id',    itemController.getItem);
-router.post('/item/',           itemController.postItem);
+router.post('/item',            itemController.postItem);
+router.put('/item',             itemController.updateItem);
 router.delete('/item/:item_id', itemController.deleteItem);
 
 module.exports = router;

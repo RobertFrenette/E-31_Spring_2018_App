@@ -1,45 +1,56 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { ItemService } from './../providers/item/item.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class EditComponent implements OnInit {
   userName = '';
   user_id = '';
   warning = false;
   warningmsg = '';
-  items: any = null;
+  item_id = '';
+
+  itemName = '';
+  itemNameText = '';
+  description = ''
+  descriptionText = '';
 
   constructor(
     private itemService: ItemService, 
     private router: Router,
     private route: ActivatedRoute) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.route.params.subscribe(params => {
       this.userName = params['userName'];
       this.user_id = params['user_id'];
+      this.item_id = params['item_id'];
 
-      this.itemService.getItems(this.user_id)
+      this.itemService.getItem(this.item_id)
       .subscribe(
         result => {
           // Handle result
           //console.log(result);
-          this.items = result;
+          this.itemName = result[0].name;
+          this.itemNameText = result[0].name;
+          this.description = result[0].desc;
+          this.descriptionText = result[0].desc;
         },
         error => {
           //console.log(error);
+          this.warningmsg = 'Item GET unsuccessful.';
+          this.warning = true;
         },
         () => {
           // 'onCompleted' callback.
-          this.warning = false;
         }
       );
+
     });
   }
 
@@ -48,12 +59,11 @@ export class DashboardComponent implements OnInit {
       this.warningmsg = 'Item Name is required.';
       this.warning = true;
     } else {
-      this.itemService.create(this.user_id, f.itemName, f.description)
+      this.itemService.update(this.user_id, this.item_id, f.itemName, f.description)
       .subscribe(
         result => {
           // Handle result
           //console.log(result);
-          this.items.push(result);
         },
         error => {
           //console.log(error);
@@ -62,36 +72,14 @@ export class DashboardComponent implements OnInit {
         },
         () => {
           // 'onCompleted' callback.
-          this.warning = false;
+          this.router.navigate(['dashboard', {userName: this.userName, user_id: this.user_id}]);
         }
       );
     }
   }
 
-  onEdit(id) {
-    this.router.navigate(['edit', {userName: this.userName, user_id: this.user_id, item_id: id}]);
-  }
-
-  onDelete(id) {
-    this.itemService.delete(id)
-    .subscribe(
-      result => {
-        // Handle result
-        //console.log(result);
-
-        let allItems = this.items;
-        var filteredItems = allItems.filter((item) => item._id !== result._id);
-    
-        this.items = filteredItems;
-      },
-      error => {
-        //console.log(error);
-      },
-      () => {
-        // 'onCompleted' callback.
-        this.warning = false;
-      }
-    );
+  onCancel() {
+    this.router.navigate(['dashboard', {userName: this.userName, user_id: this.user_id}]);
   }
 
 }

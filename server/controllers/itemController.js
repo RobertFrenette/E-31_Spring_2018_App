@@ -78,6 +78,26 @@ ItemController.postItem = (req, res) => {
   });
 };
 
+ItemController.updateItem = (req, res) => {
+  log.info(`Updating Item: ${req.params.item_id}`);
+  itemService.update(
+      req.body.item_id,
+      {
+        user_id: req.body.user_id,
+        name: req.body.name,
+        desc: req.body.desc
+      },
+      {new: true}
+  )
+  .then((item) => {
+      res.json(item);
+  })
+  .catch((err) => {
+    log.error(`Updating Item error: ${err}`);
+    res.status(500).send();
+  });
+};
+
 ItemController.deleteItem = (req, res) => {
   log.info(`Deleting Item: ${req.params.item_id}`);
   itemService.delete(req.params.item_id)

@@ -17,6 +17,7 @@ import { NavComponent } from './nav/nav.component';
 import { AuthService } from './providers/auth/auth.service';
 import { ItemService } from './providers/item/item.service';
 import { NavService } from './providers/nav/nav.service';
+import { EditComponent } from './edit/edit.component';
 
 const appRoutes: Routes = [
   {path: '', component:HomeComponent },
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'reset', component: ResetComponent},
   {path: 'confirm', component:ConfirmComponent },
-  {path: 'dashboard', component: DashboardComponent}
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'edit', component:EditComponent }
 ];
 
 @NgModule({
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     HomeComponent,
     DashboardComponent,
     FooterComponent,
-    NavComponent
+    NavComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

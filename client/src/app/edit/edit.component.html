@@ -1,0 +1,20 @@
+<h1>Edit Item</h1>
+<div class="container">
+  <form id="editItemForm" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+    <div class="form-group">
+      <label for="itemName">Item Name</label>
+      <input type="text" class="form-control" 
+            id="itemName" name="itemName" 
+            [(ngModel)]="itemNameText" #itemName="ngModel" 
+            required autofocus />
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" 
+            id="description" name="description" 
+            [(ngModel)]="descriptionText" #description="ngModel" />
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+    <button type="reset" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+  </form>
+</div>

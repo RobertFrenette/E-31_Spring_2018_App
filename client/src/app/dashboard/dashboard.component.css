@@ -2,6 +2,11 @@ table {
   width: 90%;
 }
 
+.fa-edit:hover {
+  cursor: pointer;
+  color: blue;
+}
+
 .fa-trash-o:hover {
   cursor: pointer;
   color: red;

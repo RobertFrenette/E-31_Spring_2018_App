@@ -12,10 +12,10 @@ import { NavService } from '../providers/nav/nav.service';
 export class LoginComponent implements OnInit {
 
   userName: String = '';
+  user_id = '';
   error = false;
   errmsg = '';
-  _id = '';
-
+  
   constructor(
     private navService: NavService,
     private authService: AuthService, 
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         result => {
           // Handle result
           //console.log(result);
-          this._id = result._id;
+          this.user_id = result._id;
         },
         error => {
           //console.log(error);
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
           */
           this.navService.sendMessage(true);
           // No errors, route to new page here
-          this.router.navigate(['dashboard', {userName: f.userName, _id: this._id}]);
+          this.router.navigate(['dashboard', {userName: f.userName, user_id: this.user_id}]);
         }
       );
     }

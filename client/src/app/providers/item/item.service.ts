@@ -21,6 +21,16 @@ export class ItemService {
       .map(res => <any[]>res.json());
   }
 
+  update(user_id: string, item_id: string, itemname: string, description: string) : Observable<any> {
+    return this.http.put(this.apiEndpoint + 'item', {user_id: user_id, item_id: item_id, name : itemname, desc : description}, this.options)
+      .map(res => <any[]>res.json());
+  }
+
+  getItem(item_id: string) : Observable<any> {
+    return this.http.get(this.apiEndpoint + 'item/' + item_id, this.options)
+      .map(res => <any[]>res.json());
+  }
+
   getItems(user_id: string) : Observable<any> {
     return this.http.get(this.apiEndpoint + 'items/' + user_id, this.options)
       .map(res => <any[]>res.json());

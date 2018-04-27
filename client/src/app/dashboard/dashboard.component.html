@@ -30,11 +30,16 @@
         <th>&nbsp;</th>
       </tr>
     </thead>
-    <tr *ngFor="let item of items">
-      <td>{{item.name}}</td>
-      <td>{{item.desc}}</td>
-      <td><i class="fa fa-trash-o" (click)="delete(item._id)"></i></td>
-    </tr>
-    <tbody id="itemsList"></tbody>
+    <tbody id="itemsList">
+      <tr *ngFor="let item of items">
+        <td>{{item.name}}</td>
+        <td>{{item.desc}}</td>
+        <td>
+          <i class="fa fa-edit" (click)="onEdit(item._id)"></i>
+          &nbsp;
+          <i class="fa fa-trash-o" (click)="onDelete(item._id)"></i>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>
