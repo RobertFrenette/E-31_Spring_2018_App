@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NavComponent } from './nav/nav.component';
 
 import { AuthService } from './providers/auth/auth.service';
+import { ListService } from './providers/list/list.service';
 import { ItemService } from './providers/item/item.service';
 import { NavService } from './providers/nav/nav.service';
 import { EditComponent } from './edit/edit.component';
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     AuthService,
+    ListService,
     ItemService,
     NavService
   ],

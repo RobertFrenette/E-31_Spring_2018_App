@@ -1,19 +1,13 @@
-<h1>Items (<span id="userNameSpan">{{userName}}</span>)</h1>
+<h3>Lists (<span id="userNameSpan">{{userName}}</span>)</h3>
 <div class="container">
-  <form id="addItemForm" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+  <form id="addListForm" #form="ngForm" (ngSubmit)="onSubmitList(form.value)">
     <div class="form-group">
-      <label for="itemName">Item Name</label>
+      <label for="listName">List Name</label>
       <input type="text" class="form-control" 
-            id="itemName" name="itemName" ngModel #itemName="ngModel"
-            placeholder="Enter an Item Name" required autofocus />
+            id="listName" name="listName" ngModel #itemName="ngModel"
+            placeholder="Enter a List Name" required autofocus />
     </div>
-    <div class="form-group">
-      <label for="description">Description</label>
-      <input type="text" class="form-control" 
-            id="description" name="description" ngModel #description="ngModel"
-            placeholder="(optional)" />
-    </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Add Item</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Add List</button>
     <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
   </form>
 </div>
@@ -21,25 +15,71 @@
   <br />
   <div class="alert alert-warning hidden" role="alert" id="warningMsg" *ngIf="warning == true">{{warningmsg}}</div>
   <hr />
-  <h3>Items</h3>
+  <h3>Lists</h3>
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Item Name</th>
-        <th>Description</th>
+        <th>List Name</th>
         <th>&nbsp;</th>
       </tr>
     </thead>
-    <tbody id="itemsList">
-      <tr *ngFor="let item of items">
-        <td>{{item.name}}</td>
-        <td>{{item.desc}}</td>
+    <tbody id="listsList">
+      <tr *ngFor="let list of lists">
+        <td>{{list.name}}</td>
         <td>
-          <i class="fa fa-edit" (click)="onEdit(item._id)"></i>
+          <i class="fa fa-edit" (click)="onEditList(list._id)"></i>
           &nbsp;
-          <i class="fa fa-trash-o" (click)="onDelete(item._id)"></i>
+          <i class="fa fa-trash-o" (click)="onDeleteList(list._id)"></i>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<div class="container" *ngIf="showItemsDiv == true">
+  <h4>Items</h4>
+  <div class="container">
+    <form id="addItemForm" #form="ngForm" (ngSubmit)="onSubmitItem(form.value)">
+      <div class="form-group">
+        <label for="itemName">Item Name</label>
+        <input type="text" class="form-control" 
+              id="itemName" name="itemName" ngModel #itemName="ngModel"
+              placeholder="Enter an Item Name" required  />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" 
+              id="description" name="description" ngModel #description="ngModel"
+              placeholder="(optional)" />
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Add Item</button>
+      <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
+    </form>
+  </div>
+  <div class="container" id="itemsDiv">
+    <br />
+    <div class="alert alert-warning hidden" role="alert" id="warningMsg" *ngIf="warning == true">{{warningmsg}}</div>
+    <hr />
+    <h3>Items</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Description</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody id="itemsList">
+        <tr *ngFor="let item of items">
+          <td>{{item.name}}</td>
+          <td>{{item.desc}}</td>
+          <td>
+            <i class="fa fa-edit" (click)="onEditItem(item._id)"></i>
+            &nbsp;
+            <i class="fa fa-trash-o" (click)="onDeleteItem(item._id)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

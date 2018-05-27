@@ -4,12 +4,12 @@ const itemService = require('../services/itemService');
 var ItemController = {};
 
 ItemController.getItems = (req, res) => {
-  let user_id = req.params.user_id;
+  let list_id = req.params.list_id;
 
-  if (user_id) {
-    log.info(`Get Items Request: ${user_id}`);
+  if (list_id) {
+    log.info(`Get Items Request: ${list_id}`);
     
-    itemService.getItems(user_id)
+    itemService.getItems(list_id)
     .then((items) => {
       res.json(items);
     })
@@ -31,30 +31,30 @@ ItemController.getItem = (req, res) => {
     log.info(`Get Item Request: ${item_id}`);
     
     itemService.getItem(item_id)
-    .then((items) => {
-      res.json(items);
+    .then((item) => {
+      res.json(item);
     })
     .catch((err) => {
-      log.error(`Get Items Error: ${err}`);
+      log.error(`Get Item Error: ${err}`);
       res.status(500).send();
     });
   } else {
     // username not passed
-    log.error(`Error: Get Items - user not logged in`);
+    log.error(`Error: Get Item - user not logged in`);
     res.status(500).send();
   }
 };
 
 ItemController.postItem = (req, res) => {
-  let user_id = req.body.user_id;
+  let list_id = req.body.list_id;
   let itemname = req.body.itemname;
   let description = req.body.description || ' ';
 
-  itemService.findExistingItem(user_id, itemname)
+  itemService.findExistingItem(list_id, itemname)
   .then((items) => {
     if (items.length === 0) {
       itemService.postItem({
-        user_id: user_id,
+        list_id: list_id,
         name: itemname,
         desc: description
       })
@@ -68,7 +68,7 @@ ItemController.postItem = (req, res) => {
 
     } else {
       // Item exists
-      log.error(`Add Item Error: Item with name ${itemname} already esists for User ${user_id}.`);
+      log.error(`Add Item Error: Item with name ${itemname} already esists for List ${list_id}.`);
       res.status(400).send();
     }
   })
@@ -79,11 +79,11 @@ ItemController.postItem = (req, res) => {
 };
 
 ItemController.updateItem = (req, res) => {
-  log.info(`Updating Item: ${req.params.item_id}`);
+  log.info(`Updating Item: ${req.body.item_id}`);
   itemService.update(
       req.body.item_id,
       {
-        user_id: req.body.user_id,
+        list_id: req.body.list_id,
         name: req.body.name,
         desc: req.body.desc
       },
@@ -103,7 +103,6 @@ ItemController.deleteItem = (req, res) => {
   itemService.delete(req.params.item_id)
   .then((item) => {
     if (item) {
-      //res.end();
       res.json(item);
     } else {
       log.error(`Delete Item Error: Item ${req.params.item_id} not found.`);

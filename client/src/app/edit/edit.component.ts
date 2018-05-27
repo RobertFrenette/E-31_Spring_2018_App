@@ -11,6 +11,7 @@ import { ItemService } from './../providers/item/item.service';
 export class EditComponent implements OnInit {
   userName = '';
   user_id = '';
+  list_id = '';
   warning = false;
   warningmsg = '';
   item_id = '';
@@ -29,7 +30,10 @@ export class EditComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.userName = params['userName'];
       this.user_id = params['user_id'];
+      this.list_id = params['list_id'];
       this.item_id = params['item_id'];
+
+      console.log(`${this.userName }, ${this.list_id}, ${this.item_id}`);
 
       this.itemService.getItem(this.item_id)
       .subscribe(
@@ -59,7 +63,7 @@ export class EditComponent implements OnInit {
       this.warningmsg = 'Item Name is required.';
       this.warning = true;
     } else {
-      this.itemService.update(this.user_id, this.item_id, f.itemName, f.description)
+      this.itemService.update(this.list_id, this.item_id, f.itemName, f.description)
       .subscribe(
         result => {
           // Handle result

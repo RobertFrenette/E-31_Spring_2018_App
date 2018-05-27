@@ -3,9 +3,8 @@ const Item = require('../models/item');
 
 var itemService = {};
 
-
-itemService.getItems = (user_id) => {
-  return Item.find({user_id: user_id})
+itemService.getItems = (list_id) => {
+  return Item.find({list_id: list_id})
   .then((items) => {
       return items;
   })
@@ -13,7 +12,6 @@ itemService.getItems = (user_id) => {
     throw err;
   });    
 };
-
 
 itemService.getItem = (item_id) => {
     return Item.find({_id: item_id})
@@ -25,11 +23,10 @@ itemService.getItem = (item_id) => {
     });    
 };
  
-
-itemService.findExistingItem = (user_id, itemname) => {
+itemService.findExistingItem = (list_id, itemname) => {
   var query = Item.find()
   .and([
-    { $and: [{user_id: user_id}, {name: itemname}] }
+    { $and: [{list_id: list_id}, {name: itemname}] }
   ]);
   var promise = query.exec();
 
@@ -77,5 +74,6 @@ itemService.delete = (itemId) => {
     throw err;
   });
 };
+
 module.exports = itemService;
  
